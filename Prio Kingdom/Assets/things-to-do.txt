@@ -1,5 +1,0 @@
-create worker class
-
-create jobs
-
-create resources
