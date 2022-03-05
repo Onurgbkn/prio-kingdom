@@ -16,6 +16,8 @@ public class Resource : MonoBehaviour
 
     public Transform nearest_storage;
 
+    private bool isQuitting;
+
     ResourceHandler reshand;
     private void Start()
     {
@@ -35,5 +37,20 @@ public class Resource : MonoBehaviour
                 cur ++;
             }
         }
+    }
+
+    void OnApplicationQuit()
+    {
+        isQuitting = true;
+    }
+
+    void OnDestroy()
+    {
+        if (this.type.ToString() == "wood" && !isQuitting)
+        {
+            reshand.resources.Remove(this);
+            reshand.SpawnTrees();
+        }
+
     }
 }

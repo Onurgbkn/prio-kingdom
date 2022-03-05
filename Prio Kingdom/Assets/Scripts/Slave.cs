@@ -13,9 +13,12 @@ public class Slave : MonoBehaviour
     public string curJob;
     public string state;
 
+    public GameObject axe;
+
     private void Start()
     {
         reshand = GameObject.Find("GameHandler").GetComponent<ResourceHandler>();
+        jobs.Add("tree falling");
         jobs.Add("mine copper");
         jobs.Add("mine iron");
         animator = GetComponent<Animator>();
@@ -36,6 +39,10 @@ public class Slave : MonoBehaviour
         {
             DoMining("iron");
         }
+        else if (curJob == "tree falling")
+        {
+            CutTrees();
+        }
     }
 
     private string GetJob()
@@ -55,6 +62,16 @@ public class Slave : MonoBehaviour
             if (job == "mine iron")
             {
                 foreach (Storage storage in reshand.GetStorages("iron"))
+                {
+                    if (storage.cur < storage.max)
+                    {
+                        return job;
+                    }
+                }
+            }
+            if (job == "tree falling")
+            {
+                foreach (Storage storage in reshand.GetStorages("wood"))
                 {
                     if (storage.cur < storage.max)
                     {
@@ -109,6 +126,61 @@ public class Slave : MonoBehaviour
                     state = "moving";
                 }
             }
+        }
+    }
+
+    private void CutTrees()
+    {
+        Transform nearest = GetNearestSource("wood").transform;
+        if (Vector3.Distance(agent.transform.position, nearest.GetChild(3).transform.position) < 5)
+        {
+            if (state == "moving")
+            {
+                state = "working";
+                agent.ResetPath();
+                transform.LookAt(nearest.GetChild(3).transform.position);
+                animator.SetBool("moving", false);
+                animator.SetBool("cutting", true);
+                nearest.GetComponent<Resource>().workerCount += 1;
+            }
+            if (state == "working" && nearest.GetComponent<Resource>().cur == nearest.GetComponent<Resource>().max)
+            {
+                state = "carry";
+                agent.destination = nearest.GetComponent<Resource>().nearest_storage.transform.position;
+                Destroy(nearest.gameObject);
+                animator.SetBool("moving", true);
+                animator.SetBool("cutting", false);
+            }
+
+        }
+        else
+        {
+            if (state != "carry")
+            {
+                state = "moving";
+                agent.destination = nearest.GetChild(3).transform.position;
+                animator.SetBool("moving", true);
+                animator.SetBool("cutting", false);
+            }
+            else
+            {
+                Transform nearstore = nearest.GetComponent<Resource>().nearest_storage.transform;
+                agent.destination = nearstore.transform.position;
+                if (Vector3.Distance(agent.transform.position, nearstore.position) < 4)
+                {
+                    nearstore.GetComponent<Storage>().AddResource(5);
+                    state = "moving";
+                }
+            }
+        }
+
+        if (state == "working")
+        {
+            axe.SetActive(true);
+        }
+        else
+        {
+            axe.SetActive(false);
         }
     }
 
