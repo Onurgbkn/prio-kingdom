@@ -7,6 +7,11 @@ public class ResourceHandler : MonoBehaviour
     public List<Resource> resources;
     public List<Storage> storages;
 
+    public List<string> available_jobs;
+
+
+
+
     public GameObject forest;
 
     private void Start()
@@ -15,7 +20,9 @@ public class ResourceHandler : MonoBehaviour
         {
             SpawnTrees();
         }
+        UpdateJobs();
     }
+
 
     public void SpawnTrees()
     {
@@ -84,13 +91,34 @@ public class ResourceHandler : MonoBehaviour
         return nearest;
     }
 
-    public void UpdateStorages(string type)
+    public void UpdateStorages(string type) // updates nearest storage of source
     {
         foreach (Resource source in resources)
         {
             if (source.type.ToString() == type)
             {
                 source.nearest_storage = GetNearestStorage(source.transform.position, type);
+            }
+        }
+    }
+
+    public void UpdateJobs()
+    {
+        available_jobs.Clear();
+        foreach (Storage storage in storages)
+        {
+            // if there is an available storage
+            if (storage.cur < storage.max && !available_jobs.Contains(storage.type.ToString()))
+            {
+                foreach (Resource source in resources)
+                {
+                    // also if there is available source
+                    if (source.type.ToString() == storage.type.ToString())
+                    {
+                        available_jobs.Add(source.type.ToString());
+                        break;
+                    }
+                }
             }
         }
     }

@@ -18,9 +18,9 @@ public class Slave : MonoBehaviour
     private void Start()
     {
         reshand = GameObject.Find("GameHandler").GetComponent<ResourceHandler>();
-        jobs.Add("tree falling");
-        jobs.Add("mine copper");
-        jobs.Add("mine iron");
+        jobs.Add("wood");
+        jobs.Add("copper");
+        jobs.Add("iron");
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
     }
@@ -32,14 +32,14 @@ public class Slave : MonoBehaviour
         {
             animator.SetBool("moving", false);
             animator.SetBool("working", false);
-        }else if(curJob == "mine copper") {
+        }else if(curJob == "copper") {
             DoMining("copper");
         }
-        else if (curJob == "mine iron")
+        else if (curJob == "iron")
         {
             DoMining("iron");
         }
-        else if (curJob == "tree falling")
+        else if (curJob == "wood")
         {
             CutTrees();
         }
@@ -49,35 +49,9 @@ public class Slave : MonoBehaviour
     {
         foreach (string job in jobs)
         {
-            if (job == "mine copper")
+            if (reshand.available_jobs.Contains(job))
             {
-                foreach (Storage storage in reshand.GetStorages("copper"))
-                {
-                    if (storage.cur < storage.max)
-                    {
-                        return job;
-                    }
-                }
-            }
-            if (job == "mine iron")
-            {
-                foreach (Storage storage in reshand.GetStorages("iron"))
-                {
-                    if (storage.cur < storage.max)
-                    {
-                        return job;
-                    }
-                }
-            }
-            if (job == "tree falling")
-            {
-                foreach (Storage storage in reshand.GetStorages("wood"))
-                {
-                    if (storage.cur < storage.max)
-                    {
-                        return job;
-                    }
-                }
+                return job;
             }
         }
         return "idle";
@@ -197,7 +171,6 @@ public class Slave : MonoBehaviour
                 nearDist = dist;
             }
         }
-
         return nearest;
     }
 
@@ -215,7 +188,6 @@ public class Slave : MonoBehaviour
                 nearDist = dist;
             }
         }
-
         return nearest;
     }
 }

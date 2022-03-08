@@ -19,7 +19,7 @@ public class Resource : MonoBehaviour
     private bool isQuitting;
 
     ResourceHandler reshand;
-    private void Start()
+    private void Awake()
     {
         reshand = GameObject.Find("GameHandler").GetComponent<ResourceHandler>();
         reshand.resources.Add(this);
@@ -51,6 +51,5 @@ public class Resource : MonoBehaviour
             reshand.resources.Remove(this);
             reshand.SpawnTrees();
         }
-
     }
 }

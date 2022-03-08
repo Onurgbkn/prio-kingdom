@@ -27,7 +27,8 @@ public class Storage : MonoBehaviour
         {
             cur += amount;
             if (cur < max) cur = max;
-            reshand.UpdateStorages(type.ToString());
+            reshand.UpdateStorages(type.ToString()); // update nearest storage of source
+            reshand.UpdateJobs();
         }
     }
 }
