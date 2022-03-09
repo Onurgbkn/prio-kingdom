@@ -23,6 +23,10 @@ public class Resource : MonoBehaviour
     {
         reshand = GameObject.Find("GameHandler").GetComponent<ResourceHandler>();
         reshand.resources.Add(this);
+    }
+
+    private void Start()
+    {
         nearest_storage = reshand.GetNearestStorage(transform.position, type.ToString());
     }
 
