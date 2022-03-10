@@ -9,11 +9,13 @@ public class Bildtest : MonoBehaviour
 
     public bool onBuild;
 
+    private bool onDrag;
+    private Vector3 dragPos;
+    private float dist;
 
     public List<Transform> colliders;
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -26,6 +28,38 @@ public class Bildtest : MonoBehaviour
         else
         {
             GetComponent<MeshRenderer>().material = matRej;
+        }
+
+
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider.name == "BuiltBox")
+                {
+                    onDrag = true;
+                }
+            }
+
+        }
+
+        if (onDrag && Input.GetTouch(0).phase == TouchPhase.Moved)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+
+            Plane plane = new Plane(Vector3.up, transform.position);
+            float distance = 0;
+            if (plane.Raycast(ray, out distance))
+            {
+                transform.parent.position = ray.GetPoint(distance);
+            }
+        }
+
+        if (onDrag && (Input.GetTouch(0).phase == TouchPhase.Ended || Input.GetTouch(0).phase == TouchPhase.Canceled))
+        {
+            onDrag = false;
         }
     }
 
