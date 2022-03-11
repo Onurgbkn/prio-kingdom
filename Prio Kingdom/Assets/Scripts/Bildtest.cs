@@ -1,11 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class Bildtest : MonoBehaviour
 {
     public Material matApr;
     public Material matRej;
+
+    private UIHandler uihandler;
+
+    private Button buttonApr;
+    private Button buttonRej;
+
 
     public bool onBuild;
 
@@ -16,6 +24,11 @@ public class Bildtest : MonoBehaviour
     public List<Transform> colliders;
     void Start()
     {
+        uihandler = GameObject.Find("UI").GetComponent<UIHandler>();
+        uihandler.buildObj = this;
+        buttonApr = uihandler.buttonApr;
+        buttonRej = uihandler.buttonRej;
+        buttonRej.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
@@ -24,10 +37,12 @@ public class Bildtest : MonoBehaviour
         if (colliders.Count == 0)
         {
             GetComponent<MeshRenderer>().material = matApr;
+            buttonApr.gameObject.SetActive(true);
         }
         else
         {
             GetComponent<MeshRenderer>().material = matRej;
+            buttonApr.gameObject.SetActive(false);
         }
 
 
@@ -78,4 +93,6 @@ public class Bildtest : MonoBehaviour
             colliders.Remove(other.transform);
         }
     }
+
+
 }
