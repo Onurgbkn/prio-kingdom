@@ -5,8 +5,11 @@ using UnityEngine.UI;
 
 public class UIHandler : MonoBehaviour
 {
+
     public Material iron;
     public Material copper;
+    public Material gold;
+    public Material stone;
 
 
     public GameObject shopanel;
@@ -16,7 +19,7 @@ public class UIHandler : MonoBehaviour
 
     public GameObject mine;
 
-    public Bildtest buildObj;
+    public BuildHandler buildObj;
 
     public void ShowShopPanel()
     {
@@ -30,9 +33,30 @@ public class UIHandler : MonoBehaviour
 
     public void SpawnIronMine()
     {
+        SpawnMine(Resource.ResourceType.iron, iron);
+    }
+
+    public void SpawnCopperMine()
+    {
+        SpawnMine(Resource.ResourceType.copper, copper);
+    }
+
+    public void SpawnStoneMine()
+    {
+        SpawnMine(Resource.ResourceType.stone, stone);
+    }
+
+    public void SpawnGoldMine()
+    {
+        SpawnMine(Resource.ResourceType.gold, gold);
+    }
+
+    public void SpawnMine(Resource.ResourceType type, Material mat)
+    {
         Vector3 sp = new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z + 15);
-        GameObject createdMine = Instantiate(mine, sp, Quaternion.identity);
-        createdMine.transform.FindChild("Ore").GetComponent<MeshRenderer>().material = iron;
+        GameObject createdMine = Instantiate(mine, sp, Quaternion.Euler(0, -90, 0));
+        createdMine.transform.Find("Ore").GetComponent<MeshRenderer>().material = mat;
+        createdMine.GetComponent<Resource>().type = type;
         shopanel.SetActive(false);
     }
 

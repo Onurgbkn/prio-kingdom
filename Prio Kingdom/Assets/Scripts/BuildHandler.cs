@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class Bildtest : MonoBehaviour
+public class BuildHandler : MonoBehaviour
 {
     public Material matApr;
     public Material matRej;
@@ -19,7 +19,6 @@ public class Bildtest : MonoBehaviour
 
     private bool onDrag;
     private Vector3 dragPos;
-    private float dist;
 
     public List<Transform> colliders;
     void Start()

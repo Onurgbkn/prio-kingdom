@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Resource : MonoBehaviour
 {
-    public enum ResourceType { wood, iron, copper };
+    public enum ResourceType { wood, iron, copper, stone, gold };
     public ResourceType type;
 
     public int max; // max resource capacity held
