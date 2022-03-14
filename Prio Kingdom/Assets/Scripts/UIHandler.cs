@@ -13,22 +13,39 @@ public class UIHandler : MonoBehaviour
 
 
     public GameObject shopanel;
+    public GameObject minePanel;
+    public GameObject storagePanel;
 
     public Button buttonApr;
     public Button buttonRej;
 
     public GameObject mine;
+    public GameObject logolder;
 
     public BuildHandler buildObj;
 
     public void ShowShopPanel()
     {
         shopanel.SetActive(true);
+        Camera.main.GetComponent<CamHandler>().isDragable = false;
     }
 
     public void HideShopPanel()
     {
         shopanel.SetActive(false);
+        Camera.main.GetComponent<CamHandler>().isDragable = true;
+    }
+
+    public void ShowMines()
+    {
+        minePanel.SetActive(true);
+        storagePanel.SetActive(false);
+    }
+
+    public void ShowStorages()
+    {
+        minePanel.SetActive(false);
+        storagePanel.SetActive(true);
     }
 
     public void SpawnIronMine()
@@ -58,6 +75,15 @@ public class UIHandler : MonoBehaviour
         createdMine.transform.Find("Ore").GetComponent<MeshRenderer>().material = mat;
         createdMine.GetComponent<Resource>().type = type;
         shopanel.SetActive(false);
+        Camera.main.GetComponent<CamHandler>().isDragable = true;
+    }
+
+    public void SpawnLogHolder()
+    {
+        Vector3 sp = new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z + 15);
+        GameObject createdStorage = Instantiate(logolder, sp, Quaternion.Euler(0, -90, 0));
+        shopanel.SetActive(false);
+        Camera.main.GetComponent<CamHandler>().isDragable = true;
     }
 
 

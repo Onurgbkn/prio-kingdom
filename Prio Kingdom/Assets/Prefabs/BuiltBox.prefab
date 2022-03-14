@@ -110,6 +110,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   matApr: {fileID: 2100000, guid: dc122c40c13ec14449f435495db40029, type: 2}
   matRej: {fileID: 2100000, guid: b97f1db9314b2564ca282510b075b742, type: 2}
-  uihandler: {fileID: 0}
   onBuild: 0
   colliders: []

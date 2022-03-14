@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Storage : MonoBehaviour
 {
-    public enum ResourceType { wood, iron, copper };
+    public enum ResourceType { wood, iron, copper, stone, gold };
     public ResourceType type;
 
     public int max;
@@ -17,6 +17,15 @@ public class Storage : MonoBehaviour
         reshand.storages.Add(this);
     }
 
+    private void Update()
+    {
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            AddResource(1);
+        }
+    }
+
     public void AddResource(int amount)
     {
         if (cur + amount < max)
@@ -26,9 +35,37 @@ public class Storage : MonoBehaviour
         else
         {
             cur += amount;
-            if (cur < max) cur = max;
+            if (cur > max) cur = max;
             reshand.UpdateStorages(type.ToString()); // update nearest storage of source
             reshand.UpdateJobs();
+        }
+
+        if (type.ToString() == "wood")
+        {
+            if ((float)cur / (float)max < 0.25f)
+            {
+                transform.Find("Log 1").gameObject.SetActive(false);
+                transform.Find("Log 2").gameObject.SetActive(false);
+                transform.Find("Log 3").gameObject.SetActive(false);
+            }
+            else if ((float)cur / (float)max < 0.50f)
+            {
+                transform.Find("Log 1").gameObject.SetActive(true);
+                transform.Find("Log 2").gameObject.SetActive(false);
+                transform.Find("Log 3").gameObject.SetActive(false);
+            }
+            else if ((float)cur / (float)max < 0.75f)
+            {
+                transform.Find("Log 1").gameObject.SetActive(true);
+                transform.Find("Log 2").gameObject.SetActive(true);
+                transform.Find("Log 3").gameObject.SetActive(false);
+            }
+            else
+            {
+                transform.Find("Log 1").gameObject.SetActive(true);
+                transform.Find("Log 2").gameObject.SetActive(true);
+                transform.Find("Log 3").gameObject.SetActive(true);
+            }
         }
     }
 }

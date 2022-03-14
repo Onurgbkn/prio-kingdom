@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CamHandler : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class CamHandler : MonoBehaviour
 
     private float camSpeed = 2.5f;
 
+    public bool isDragable;
 
     void Start()
     {
@@ -26,7 +28,7 @@ public class CamHandler : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.collider.GetComponent<BuildHandler>() == null)
+                if (hit.collider.GetComponent<BuildHandler>() == null && isDragable)
                 {
                     onDrag = true;
                 }
