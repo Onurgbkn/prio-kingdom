@@ -21,6 +21,7 @@ public class UIHandler : MonoBehaviour
 
     public GameObject mine;
     public GameObject logolder;
+    public GameObject storage;
 
     public BuildHandler buildObj;
 
@@ -82,6 +83,36 @@ public class UIHandler : MonoBehaviour
     {
         Vector3 sp = new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z + 15);
         GameObject createdStorage = Instantiate(logolder, sp, Quaternion.Euler(0, -90, 0));
+        shopanel.SetActive(false);
+        Camera.main.GetComponent<CamHandler>().isDragable = true;
+    }
+
+    public void SpawnIronStorage()
+    {
+        SpawnStorage(Storage.ResourceType.iron, iron);
+    }
+
+    public void SpawnCopperStorage()
+    {
+        SpawnStorage(Storage.ResourceType.copper, copper);
+    }
+    public void SpawnStoneStorage()
+    {
+        SpawnStorage(Storage.ResourceType.stone, stone);
+    }
+    public void SpawnGoldStorage()
+    {
+        SpawnStorage(Storage.ResourceType.gold, gold);
+    }
+
+    public void SpawnStorage(Storage.ResourceType type, Material mat)
+    {
+        Vector3 sp = new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z + 15);
+        GameObject createdStorage = Instantiate(storage, sp, Quaternion.Euler(0, -90, 0));
+        createdStorage.transform.Find("Ore 1").GetComponent<MeshRenderer>().material = mat;
+        createdStorage.transform.Find("Ore 2").GetComponent<MeshRenderer>().material = mat;
+        createdStorage.transform.Find("Ore 3").GetComponent<MeshRenderer>().material = mat;
+        createdStorage.GetComponent<Storage>().type = type;
         shopanel.SetActive(false);
         Camera.main.GetComponent<CamHandler>().isDragable = true;
     }
