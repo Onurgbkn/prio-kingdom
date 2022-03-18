@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class UIHandler : MonoBehaviour
 {
+    public ResourceHandler reshand;
 
     public Material iron;
     public Material copper;
@@ -112,6 +113,7 @@ public class UIHandler : MonoBehaviour
         createdStorage.transform.Find("Ore 1").GetComponent<MeshRenderer>().material = mat;
         createdStorage.transform.Find("Ore 2").GetComponent<MeshRenderer>().material = mat;
         createdStorage.transform.Find("Ore 3").GetComponent<MeshRenderer>().material = mat;
+        createdStorage.transform.Find("Woody").GetComponent<MeshRenderer>().material = mat;
         createdStorage.GetComponent<Storage>().type = type;
         shopanel.SetActive(false);
         Camera.main.GetComponent<CamHandler>().isDragable = true;
@@ -120,8 +122,15 @@ public class UIHandler : MonoBehaviour
 
     public void BuildApproved()
     {
+        string sourceType = buildObj.GetComponent<BuildHandler>().type.Split(' ')[0];
+        string workType = buildObj.GetComponent<BuildHandler>().type.Split(' ')[1];
+
+        if (workType == "mine") buildObj.transform.parent.GetComponent<Resource>().enabled = true;
+        else if (workType == "storage") buildObj.transform.parent.GetComponent<Storage>().enabled = true;
+        
         Destroy(buildObj.gameObject.GetComponent<MeshRenderer>());
         Destroy(buildObj);
+
         buttonApr.gameObject.SetActive(false);
         buttonRej.gameObject.SetActive(false);
     }

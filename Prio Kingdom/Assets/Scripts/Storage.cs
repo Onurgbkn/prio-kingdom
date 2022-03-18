@@ -11,23 +11,18 @@ public class Storage : MonoBehaviour
     public int cur;
 
     ResourceHandler reshand;
-    private void Awake()
+    private void Start()
     {
         reshand = GameObject.Find("GameHandler").GetComponent<ResourceHandler>();
         reshand.storages.Add(this);
-    }
-
-    private void Update()
-    {
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            AddResource(1);
-        }
+        reshand.UpdateStorages(type.ToString());
+        reshand.UpdateJobs();
     }
 
     public void AddResource(int amount)
     {
+        string subtype;
+
         if (cur + amount < max)
         {
             cur += amount;
@@ -42,30 +37,38 @@ public class Storage : MonoBehaviour
 
         if (type.ToString() == "wood")
         {
-            if ((float)cur / (float)max < 0.25f)
-            {
-                transform.Find("Log 1").gameObject.SetActive(false);
-                transform.Find("Log 2").gameObject.SetActive(false);
-                transform.Find("Log 3").gameObject.SetActive(false);
-            }
-            else if ((float)cur / (float)max < 0.50f)
-            {
-                transform.Find("Log 1").gameObject.SetActive(true);
-                transform.Find("Log 2").gameObject.SetActive(false);
-                transform.Find("Log 3").gameObject.SetActive(false);
-            }
-            else if ((float)cur / (float)max < 0.75f)
-            {
-                transform.Find("Log 1").gameObject.SetActive(true);
-                transform.Find("Log 2").gameObject.SetActive(true);
-                transform.Find("Log 3").gameObject.SetActive(false);
-            }
-            else
-            {
-                transform.Find("Log 1").gameObject.SetActive(true);
-                transform.Find("Log 2").gameObject.SetActive(true);
-                transform.Find("Log 3").gameObject.SetActive(true);
-            }
+            subtype = "Log";
+        }
+        else
+        {
+            subtype = "Ore";
+        }
+
+
+
+        if ((float)cur / (float)max < 0.25f)
+        {
+            transform.Find(subtype + " 1").gameObject.SetActive(false);
+            transform.Find(subtype + " 2").gameObject.SetActive(false);
+            transform.Find(subtype + " 3").gameObject.SetActive(false);
+        }
+        else if ((float)cur / (float)max < 0.50f)
+        {
+            transform.Find(subtype + " 1").gameObject.SetActive(true);
+            transform.Find(subtype + " 2").gameObject.SetActive(false);
+            transform.Find(subtype + " 3").gameObject.SetActive(false);
+        }
+        else if ((float)cur / (float)max < 0.75f)
+        {
+            transform.Find(subtype + " 1").gameObject.SetActive(true);
+            transform.Find(subtype + " 2").gameObject.SetActive(true);
+            transform.Find(subtype + " 3").gameObject.SetActive(false);
+        }
+        else
+        {
+            transform.Find(subtype + " 1").gameObject.SetActive(true);
+            transform.Find(subtype + " 2").gameObject.SetActive(true);
+            transform.Find(subtype + " 3").gameObject.SetActive(true);
         }
     }
 }

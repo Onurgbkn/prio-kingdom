@@ -20,6 +20,8 @@ public class BuildHandler : MonoBehaviour
     private bool onDrag;
     private Vector3 dragPos;
 
+    public string type;
+
     public List<Transform> colliders;
     void Start()
     {
@@ -28,6 +30,15 @@ public class BuildHandler : MonoBehaviour
         buttonApr = uihandler.buttonApr;
         buttonRej = uihandler.buttonRej;
         buttonRej.gameObject.SetActive(true);
+
+        if (transform.parent.GetComponent<Storage>() != null)
+        {
+            type = transform.parent.GetComponent<Storage>().type.ToString() + " storage";
+        }
+        else if (transform.parent.GetComponent<Resource>() != null)
+        {
+            type = transform.parent.GetComponent<Resource>().type.ToString() + " mine";
+        }
     }
 
     // Update is called once per frame

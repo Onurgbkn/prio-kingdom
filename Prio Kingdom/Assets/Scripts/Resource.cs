@@ -19,16 +19,15 @@ public class Resource : MonoBehaviour
     private bool isQuitting;
 
     ResourceHandler reshand;
-    private void Awake()
-    {
-        reshand = GameObject.Find("GameHandler").GetComponent<ResourceHandler>();
-        reshand.resources.Add(this);
-    }
 
     private void Start()
     {
+        reshand = GameObject.Find("GameHandler").GetComponent<ResourceHandler>();
+        reshand.resources.Add(this);
         nearest_storage = reshand.GetNearestStorage(transform.position, type.ToString());
+        reshand.UpdateJobs();
     }
+
 
     private void Update()
     {
