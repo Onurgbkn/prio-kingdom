@@ -6,6 +6,7 @@ public class ResourceHandler : MonoBehaviour
 {
     public List<Resource> resources;
     public List<Storage> storages;
+    public List<Slave> slaves;
 
     public List<string> available_jobs;
 
@@ -120,6 +121,14 @@ public class ResourceHandler : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    public void GetJob4Slave() // Update current job for slaves
+    {
+        foreach (Slave slave in slaves)
+        {
+            slave.GetJob();
         }
     }
 }

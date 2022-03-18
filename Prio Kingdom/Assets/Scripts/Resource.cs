@@ -26,6 +26,7 @@ public class Resource : MonoBehaviour
         reshand.resources.Add(this);
         nearest_storage = reshand.GetNearestStorage(transform.position, type.ToString());
         reshand.UpdateJobs();
+        reshand.GetJob4Slave();
     }
 
 

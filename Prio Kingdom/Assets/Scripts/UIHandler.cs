@@ -99,7 +99,7 @@ public class UIHandler : MonoBehaviour
     }
     public void SpawnStoneStorage()
     {
-        SpawnStorage(Storage.ResourceType.stone, stone);
+        SpawnStorage(Storage.ResourceType.stone, stone); 
     }
     public void SpawnGoldStorage()
     {

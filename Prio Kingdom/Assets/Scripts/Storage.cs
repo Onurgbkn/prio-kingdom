@@ -17,6 +17,7 @@ public class Storage : MonoBehaviour
         reshand.storages.Add(this);
         reshand.UpdateStorages(type.ToString());
         reshand.UpdateJobs();
+        reshand.GetJob4Slave();
     }
 
     public void AddResource(int amount)
@@ -33,17 +34,11 @@ public class Storage : MonoBehaviour
             if (cur > max) cur = max;
             reshand.UpdateStorages(type.ToString()); // update nearest storage of source
             reshand.UpdateJobs();
+            reshand.GetJob4Slave();
         }
 
-        if (type.ToString() == "wood")
-        {
-            subtype = "Log";
-        }
-        else
-        {
-            subtype = "Ore";
-        }
-
+        if (type.ToString() == "wood") subtype = "Log";
+        else subtype = "Ore";
 
 
         if ((float)cur / (float)max < 0.25f)

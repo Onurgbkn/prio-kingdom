@@ -18,16 +18,17 @@ public class Slave : MonoBehaviour
     private void Start()
     {
         reshand = GameObject.Find("GameHandler").GetComponent<ResourceHandler>();
+        reshand.slaves.Add(this);
         jobs.Add("wood");
         jobs.Add("copper");
         jobs.Add("iron");
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        GetJob();
     }
 
     private void Update()
     {
-        curJob = GetJob();
         if (curJob == "idle")
         {
             animator.SetBool("moving", false);
@@ -45,16 +46,17 @@ public class Slave : MonoBehaviour
         }
     }
 
-    private string GetJob()
+    public void GetJob()
     {
         foreach (string job in jobs)
         {
             if (reshand.available_jobs.Contains(job))
             {
-                return job;
+                curJob = job;
+                return;
             }
         }
-        return "idle";
+        curJob = "idle";
     }
 
     private void DoMining(string type)
