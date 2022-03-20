@@ -11,6 +11,7 @@ public class Resource : MonoBehaviour
     public int cur;
 
     public int workerCount = 0;
+    public int maxWorker;
 
     public float progress;
 

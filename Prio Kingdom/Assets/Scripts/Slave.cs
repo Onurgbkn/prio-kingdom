@@ -13,6 +13,8 @@ public class Slave : MonoBehaviour
     public string curJob;
     public string state;
 
+    public GameObject targetObj;
+
     public GameObject axe;
 
     private void Start()
@@ -25,11 +27,12 @@ public class Slave : MonoBehaviour
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         GetJob();
+        Time2Work(curJob);
     }
 
     private void Update()
     {
-        if (curJob == "idle")
+        /*if (curJob == "idle")
         {
             animator.SetBool("moving", false);
             animator.SetBool("working", false);
@@ -43,7 +46,7 @@ public class Slave : MonoBehaviour
         else if (curJob == "wood")
         {
             CutTrees();
-        }
+        }*/
     }
 
     public void GetJob()
@@ -58,6 +61,64 @@ public class Slave : MonoBehaviour
         }
         curJob = "idle";
     }
+
+    public void Time2Work(string type)
+    {
+        GameObject nearSource = reshand.FindSource(type, transform.position);
+        if (nearSource == null)
+        {
+            // idle
+        }
+        else
+        {
+            if (Vector3.Distance(nearSource.transform.position, transform.position) < 10)
+            {
+                if (state == "moving")
+                {
+                    state = "working";
+                    agent.ResetPath();
+                    animator.SetBool("moving", false);
+                    animator.SetBool("working", true);
+                    nearSource.GetComponent<Resource>().workerCount += 1;
+                }
+                if (state == "working" && nearSource.GetComponent<Resource>().cur == nearSource.GetComponent<Resource>().max)
+                {
+                    state = "carry";
+                    nearSource.GetComponent<Resource>().cur = 0;
+                    nearSource.GetComponent<Resource>().workerCount -= 1;
+                    animator.SetBool("moving", true);
+                    animator.SetBool("working", false);
+                    targetObj = nearSource.GetComponent<Resource>().nearest_storage.gameObject;
+                    agent.destination = targetObj.transform.position;
+                }
+            }
+            else
+            {
+                if (state != "carry")
+                {
+                    state = "moving";
+                    agent.destination = nearSource.transform.position;
+                    targetObj = nearSource;
+                    animator.SetBool("moving", true);
+                    animator.SetBool("working", false);
+                }
+                else
+                {
+                    targetObj = nearSource.GetComponent<Resource>().nearest_storage.gameObject;
+                    agent.destination = targetObj.transform.position;
+                    if (Vector3.Distance(targetObj.transform.position, transform.position) < 10)
+                    {
+                        targetObj.GetComponent<Storage>().AddResource(5);
+                        state = "moving";
+                        Time2Work(curJob);
+                    }
+                }
+            }
+        }
+    }
+
+    
+    
 
     private void DoMining(string type)
     {
@@ -80,8 +141,7 @@ public class Slave : MonoBehaviour
                 animator.SetBool("moving", true);
                 animator.SetBool("working", false);
                 agent.destination = nearest.GetComponent<Resource>().nearest_storage.transform.position;
-            }
-            
+            }  
         }
         else
         {

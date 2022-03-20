@@ -131,4 +131,23 @@ public class ResourceHandler : MonoBehaviour
             slave.GetJob();
         }
     }
+
+    public GameObject FindSource(string type, Vector3 pos)
+    {
+        GameObject source = null;
+        float dist = 9999, temp;
+        foreach (Resource s in resources)
+        {
+            if (s.type.ToString() == type && s.maxWorker > s.workerCount)
+            {
+                temp = Vector3.Distance(pos, s.transform.position);
+                if (temp < dist)
+                {
+                    source = source.gameObject;
+                    dist = temp;
+                }
+            }
+        }
+        return source;
+    }
 }

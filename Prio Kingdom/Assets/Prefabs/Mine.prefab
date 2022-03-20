@@ -173,6 +173,7 @@ GameObject:
   - component: {fileID: 3899717377883493190}
   - component: {fileID: 4138923842836438298}
   - component: {fileID: 582117345483542610}
+  - component: {fileID: 5716250804972893387}
   m_Layer: 0
   m_Name: Mine
   m_TagString: Untagged
@@ -232,8 +233,25 @@ MonoBehaviour:
   max: 5
   cur: 0
   workerCount: 0
+  maxWorker: 0
   progress: 0
   nearest_storage: {fileID: 0}
+--- !u!208 &5716250804972893387
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4419514371275327996}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 6, y: 1, z: 6}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &5580041835504012550
 GameObject:
   m_ObjectHideFlags: 0
