@@ -28,6 +28,7 @@ public class Resource : MonoBehaviour
         nearest_storage = reshand.GetNearestStorage(transform.position, type.ToString());
         reshand.UpdateJobs();
         reshand.GetJob4Slave();
+        GetComponent<SphereCollider>().enabled = true;
     }
 
 
@@ -40,6 +41,10 @@ public class Resource : MonoBehaviour
             {
                 progress--;
                 cur ++;
+            }
+            if (cur == max)
+            {
+                reshand.GetJob4Slave();
             }
         }
     }

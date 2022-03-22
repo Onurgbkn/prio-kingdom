@@ -12,6 +12,7 @@ public class Slave : MonoBehaviour
     public List<string> jobs;
     public string curJob;
     public string state;
+    public string jobState;
 
     public GameObject targetObj;
 
@@ -55,7 +56,9 @@ public class Slave : MonoBehaviour
         {
             if (reshand.available_jobs.Contains(job))
             {
+                if (curJob != job) jobState = "begin2job";
                 curJob = job;
+                Time2Work(curJob);
                 return;
             }
         }
@@ -64,61 +67,62 @@ public class Slave : MonoBehaviour
 
     public void Time2Work(string type)
     {
-        GameObject nearSource = reshand.FindSource(type, transform.position);
-        if (nearSource == null)
+        if (jobState == "begin2job")
         {
-            // idle
-        }
-        else
-        {
-            if (Vector3.Distance(nearSource.transform.position, transform.position) < 10)
+            targetObj = reshand.FindSource(type, transform.position);
+            if (targetObj == null)
             {
-                if (state == "moving")
-                {
-                    state = "working";
-                    agent.ResetPath();
-                    animator.SetBool("moving", false);
-                    animator.SetBool("working", true);
-                    nearSource.GetComponent<Resource>().workerCount += 1;
-                }
-                if (state == "working" && nearSource.GetComponent<Resource>().cur == nearSource.GetComponent<Resource>().max)
-                {
-                    state = "carry";
-                    nearSource.GetComponent<Resource>().cur = 0;
-                    nearSource.GetComponent<Resource>().workerCount -= 1;
-                    animator.SetBool("moving", true);
-                    animator.SetBool("working", false);
-                    targetObj = nearSource.GetComponent<Resource>().nearest_storage.gameObject;
-                    agent.destination = targetObj.transform.position;
-                }
+                jobState = "waitn4source";
             }
             else
             {
-                if (state != "carry")
-                {
-                    state = "moving";
-                    agent.destination = nearSource.transform.position;
-                    targetObj = nearSource;
-                    animator.SetBool("moving", true);
-                    animator.SetBool("working", false);
-                }
-                else
-                {
-                    targetObj = nearSource.GetComponent<Resource>().nearest_storage.gameObject;
-                    agent.destination = targetObj.transform.position;
-                    if (Vector3.Distance(targetObj.transform.position, transform.position) < 10)
-                    {
-                        targetObj.GetComponent<Storage>().AddResource(5);
-                        state = "moving";
-                        Time2Work(curJob);
-                    }
-                }
+                agent.destination = targetObj.transform.position;
+                jobState = "movn2source";
+            }
+        }
+        else if (jobState == "movn2source")
+        {
+            if (Vector3.Distance(transform.position, targetObj.transform.position) < 15)
+            {
+                agent.ResetPath();
+                jobState = "workn";
+                targetObj.GetComponent<Resource>().workerCount += 1;
+            }
+        }
+        else if (jobState == "workn")
+        {
+            if (targetObj.GetComponent<Resource>().cur == targetObj.GetComponent<Resource>().max)
+            {
+                jobState = "caryn";
+                targetObj.GetComponent<Resource>().cur = 0;
+                targetObj.GetComponent<Resource>().workerCount -= 1;
+                targetObj = reshand.FindStorage(curJob, transform.position);
+                agent.destination = targetObj.transform.position;
+            }
+        }
+        else if (jobState == "caryn")
+        {
+            targetObj = reshand.FindStorage(curJob, transform.position);
+            Debug.Log(Vector3.Distance(transform.position, targetObj.transform.position));
+            if (Vector3.Distance(transform.position, targetObj.transform.position) < 15) // depends on slave and storage radius
+            {
+                agent.ResetPath();
+                targetObj.GetComponent<Storage>().AddResource(5);
+                jobState = "movn2source";
+                targetObj = reshand.FindSource(type, transform.position);
+                agent.destination = targetObj.transform.position;
             }
         }
     }
 
-    
-    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject == targetObj)
+        {
+            Time2Work(curJob);
+        }
+    }
+
 
     private void DoMining(string type)
     {

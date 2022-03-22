@@ -19,7 +19,7 @@ public class ResourceHandler : MonoBehaviour
     {
         for (int i = 0; i < 5; i++)
         {
-            SpawnTrees();
+            //SpawnTrees();
         }
         UpdateJobs();
     }
@@ -143,11 +143,30 @@ public class ResourceHandler : MonoBehaviour
                 temp = Vector3.Distance(pos, s.transform.position);
                 if (temp < dist)
                 {
-                    source = source.gameObject;
+                    source = s.gameObject;
                     dist = temp;
                 }
             }
         }
         return source;
+    }
+
+    public GameObject FindStorage(string type, Vector3 pos)
+    {
+        GameObject storage = null;
+        float dist = 9999, temp;
+        foreach (Storage s in storages)
+        {
+            if (s.type.ToString() == type && s.max > s.cur)
+            {
+                temp = Vector3.Distance(pos, s.transform.position);
+                if (temp < dist)
+                {
+                    storage = s.gameObject;
+                    dist = temp;
+                }
+            }
+        }
+        return storage;
     }
 }

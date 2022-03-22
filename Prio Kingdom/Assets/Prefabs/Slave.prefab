@@ -350,6 +350,7 @@ GameObject:
   - component: {fileID: 4381985120266075041}
   - component: {fileID: 4381985120266075043}
   - component: {fileID: 4381985120266075042}
+  - component: {fileID: 7854239381684932757}
   m_Layer: 0
   m_Name: Slave
   m_TagString: Untagged
@@ -429,7 +430,23 @@ MonoBehaviour:
   jobs: []
   curJob: 
   state: 
+  jobState: 
+  targetObj: {fileID: 0}
   axe: {fileID: 3462874015795701000}
+--- !u!136 &7854239381684932757
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3462874015102400750}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 7.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 3.6, z: 0}
 --- !u!1 &3732060071203052469
 GameObject:
   m_ObjectHideFlags: 0

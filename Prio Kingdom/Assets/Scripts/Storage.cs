@@ -18,6 +18,8 @@ public class Storage : MonoBehaviour
         reshand.UpdateStorages(type.ToString());
         reshand.UpdateJobs();
         reshand.GetJob4Slave();
+        GetComponent<BoxCollider>().enabled = true;
+
     }
 
     public void AddResource(int amount)
