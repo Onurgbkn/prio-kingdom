@@ -17,29 +17,34 @@ public class ResourceHandler : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < 5; i++)
-        {
-            //SpawnTrees();
-        }
+        StartCoroutine(SpawnTrees());
         UpdateJobs();
     }
 
 
-    public void SpawnTrees()
+    IEnumerator SpawnTrees() // coroutine
     {
-        int x = Random.Range(-90, 90);
-        int z = Random.Range(-90, 90);
-        Vector3 sp = new Vector3(x, 0, z);
-        var hitColliders = Physics.OverlapSphere(new Vector3(x, 5, z), 4);
-        if (hitColliders.Length > 0)
+        while (true)
         {
-            SpawnTrees();
+            if (GameObject.Find("Forest").transform.childCount < 10)
+            {
+                int x = Random.Range(-90, 90);
+                int z = Random.Range(-90, 90);
+                Vector3 sp = new Vector3(x, 0, z);
+                var hitColliders = Physics.OverlapSphere(new Vector3(x, 5, z), 4);
+                if (hitColliders.Length > 0)
+                {
+                    SpawnTrees();
+                }
+                else
+                {
+                    ;
+                    GameObject tree = Instantiate(forest, sp, Quaternion.Euler(0, Random.Range(0, 360), 0));
+                    tree.transform.parent = GameObject.Find("Forest").transform;
+                }
+            }
+            yield return new WaitForSeconds(30f);
         }
-        else
-        {
-            Instantiate(forest, sp, Quaternion.identity);
-        }
-
     }
 
     public List<Storage> GetStorages(string type)
@@ -169,4 +174,5 @@ public class ResourceHandler : MonoBehaviour
         }
         return storage;
     }
+
 }

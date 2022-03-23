@@ -1445,11 +1445,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5501518498425375671, guid: 541cf2d8206628949bc962266d1fbb3e, type: 3}
       propertyPath: cur
-      value: 15
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -5501518498425375671, guid: 541cf2d8206628949bc962266d1fbb3e, type: 3}
       propertyPath: type
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -5501518498425375671, guid: 541cf2d8206628949bc962266d1fbb3e, type: 3}
       propertyPath: m_Enabled
@@ -2045,6 +2045,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 933479563}
   m_CullTransparentMesh: 1
+--- !u!1 &977053888
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 977053889}
+  m_Layer: 0
+  m_Name: Forest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &977053889
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 977053888}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1026443622
 GameObject:
   m_ObjectHideFlags: 0
@@ -3087,7 +3117,7 @@ MonoBehaviour:
   storages: []
   slaves: []
   available_jobs: []
-  forest: {fileID: 3478752792516359249, guid: 89abb1e122b0e5848b220b63d0c488d4, type: 3}
+  forest: {fileID: 5054841182673807763, guid: 591cc43323e67e54a883415625c3fca7, type: 3}
 --- !u!1 &1746207214
 GameObject:
   m_ObjectHideFlags: 0
@@ -3778,7 +3808,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 582117345483542610, guid: 8e510e59104108b41b7def48483039ea, type: 3}
       propertyPath: type
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 582117345483542610, guid: 8e510e59104108b41b7def48483039ea, type: 3}
       propertyPath: m_Enabled

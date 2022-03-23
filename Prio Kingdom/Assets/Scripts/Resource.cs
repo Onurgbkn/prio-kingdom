@@ -59,7 +59,7 @@ public class Resource : MonoBehaviour
         if (this.type.ToString() == "wood" && !isQuitting)
         {
             reshand.resources.Remove(this);
-            reshand.SpawnTrees();
+            //reshand.SpawnTrees();
         }
     }
 }
