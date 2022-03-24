@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[SelectionBase]
 public class Resource : MonoBehaviour
 {
     public enum ResourceType { wood, iron, copper, stone, gold };
@@ -15,8 +16,6 @@ public class Resource : MonoBehaviour
 
     public float progress;
 
-    public Transform nearest_storage;
-
     private bool isQuitting;
 
     ResourceHandler reshand;
@@ -25,10 +24,10 @@ public class Resource : MonoBehaviour
     {
         reshand = GameObject.Find("GameHandler").GetComponent<ResourceHandler>();
         reshand.resources.Add(this);
-        nearest_storage = reshand.GetNearestStorage(transform.position, type.ToString());
         reshand.UpdateJobs();
         reshand.GetJob4Slave();
         GetComponent<SphereCollider>().enabled = true;
+
     }
 
 
@@ -59,6 +58,7 @@ public class Resource : MonoBehaviour
         if (this.type.ToString() == "wood" && !isQuitting)
         {
             reshand.resources.Remove(this);
+            reshand.UpdateJobs();
             //reshand.SpawnTrees();
         }
     }

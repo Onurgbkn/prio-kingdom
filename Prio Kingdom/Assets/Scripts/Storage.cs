@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[SelectionBase]
 public class Storage : MonoBehaviour
 {
     public enum ResourceType { wood, iron, copper, stone, gold };
@@ -15,11 +16,9 @@ public class Storage : MonoBehaviour
     {
         reshand = GameObject.Find("GameHandler").GetComponent<ResourceHandler>();
         reshand.storages.Add(this);
-        reshand.UpdateStorages(type.ToString());
         reshand.UpdateJobs();
         reshand.GetJob4Slave();
         GetComponent<BoxCollider>().enabled = true;
-
     }
 
     public void AddResource(int amount)
@@ -34,7 +33,6 @@ public class Storage : MonoBehaviour
         {
             cur += amount;
             if (cur > max) cur = max;
-            reshand.UpdateStorages(type.ToString()); // update nearest storage of source
             reshand.UpdateJobs();
             reshand.GetJob4Slave();
         }

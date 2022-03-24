@@ -11,10 +11,10 @@ public class TreeGrow : MonoBehaviour
 
     IEnumerator GrowTree()
     {
-        for (float scale = 0.1f; scale < 1; scale+=0.05f)
+        for (float scale = 0.1f; scale <= 1; scale+=0.05f)
         {
             transform.localScale = new Vector3(scale, scale, scale);
-            yield return new WaitForSeconds(5f); // 1f for 90 sec
+            yield return new WaitForSeconds(1f); // 5f for 90 sec
         }
         GetComponent<Resource>().enabled = true;
     }

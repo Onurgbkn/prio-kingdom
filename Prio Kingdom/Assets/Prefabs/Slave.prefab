@@ -414,7 +414,7 @@ NavMeshAgent:
   m_Height: 8
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!114 &4381985120266075042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -429,8 +429,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jobs: []
   curJob: 
-  state: 
   jobState: 
+  near2target: 0
   targetObj: {fileID: 0}
   axe: {fileID: 3462874015795701000}
 --- !u!136 &7854239381684932757
