@@ -81,9 +81,11 @@ public class Slave : MonoBehaviour
         }
         else if (jobState == "movn2source")
         {
+            targetObj = reshand.FindSource(type, transform.position);
             if (targetObj == null)
             {
-                GetJob();
+                agent.ResetPath();
+                jobState = "begin2job";
             }
             else
             {
@@ -96,6 +98,7 @@ public class Slave : MonoBehaviour
                         agent.ResetPath();
                         jobState = "workn";
                         targetObj.GetComponent<Resource>().workerCount += 1;
+                        reshand.GetJob4Slave();
                     }
                 }
                 else
@@ -121,6 +124,7 @@ public class Slave : MonoBehaviour
             if (targetObj == null)
             {
                 jobState = "begin2job";
+                GetJob();
             }
             else
             {
@@ -129,21 +133,8 @@ public class Slave : MonoBehaviour
                     near2target = false;
                     agent.ResetPath();
                     targetObj.GetComponent<Storage>().AddResource(5);
-                    if (curJob == type)
-                    {
-                        targetObj = reshand.FindSource(type, transform.position);
-                        if (targetObj == null)
-                        {
-                            jobState = "begin2job";
-                            GetJob();
-                            return;
-                        }
-                        else
-                        {
-                            jobState = "movn2source";
-                            agent.destination = targetObj.transform.position;
-                        }
-                    }
+                    jobState = "begin2job";
+                    GetJob();
                 }
                 else
                 {
@@ -169,7 +160,7 @@ public class Slave : MonoBehaviour
     {
         if (other.gameObject == targetObj && !near2target)
         {
-                near2target = false;
+            near2target = false;
         }
     }
 }
