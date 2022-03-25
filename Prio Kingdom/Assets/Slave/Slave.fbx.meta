@@ -1,11 +1,8 @@
 fileFormatVersion: 2
-guid: b511bc30c51f7c341b085d858ce09a24
+guid: 68c32a9b2390e3d4196d09df484240a8
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
-  - first:
-      74: -3999578356269874737
-    second: Cube|CubeAction
   - first:
       74: -203655887218126122
     second: mixamo.com

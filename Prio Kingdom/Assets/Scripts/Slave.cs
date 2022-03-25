@@ -18,9 +18,11 @@ public class Slave : MonoBehaviour
     public GameObject targetObj;
 
     public GameObject axe;
+    public GameObject ore;
 
     private void Start()
     {
+        ColorHandler();
         reshand = GameObject.Find("GameHandler").GetComponent<ResourceHandler>();
         reshand.slaves.Add(this);
         animator = GetComponent<Animator>();
@@ -31,7 +33,43 @@ public class Slave : MonoBehaviour
 
     private void Update()
     {
+        if (jobState == "movn2source" && !animator.GetBool("walkn"))
+        {
+            animator.SetBool("walkn", true);
+            animator.SetBool("workn", false);
+            animator.SetBool("caryn", false);
+            ore.SetActive(false);
+        }
+        else if (jobState == "caryn" && !animator.GetBool("caryn"))
+        {
+            animator.SetBool("walkn", false);
+            animator.SetBool("workn", false);
+            animator.SetBool("caryn", true);
+            ore.SetActive(true);
+        }
+        else if (jobState == "workn" && !animator.GetBool("workn"))
+        {
+            animator.SetBool("walkn", false);
+            animator.SetBool("workn", true);
+            animator.SetBool("caryn", false);
+            ore.SetActive(false);
 
+        }
+        else if ((jobState == "begin2job" || jobState == "idle"))
+        {
+            animator.SetBool("walkn", false);
+            animator.SetBool("workn", false);
+            animator.SetBool("caryn", false);
+            ore.SetActive(false);
+        }
+    }
+
+    private void ColorHandler()
+    {
+        transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+        transform.GetChild(2).GetComponent<SkinnedMeshRenderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+        transform.GetChild(3).GetComponent<SkinnedMeshRenderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+        transform.GetChild(4).GetComponent<SkinnedMeshRenderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
     }
 
     public void GetJob()
@@ -111,6 +149,8 @@ public class Slave : MonoBehaviour
         {
             if (targetObj.GetComponent<Resource>().cur == targetObj.GetComponent<Resource>().max)
             {
+                ore.GetComponent<MeshRenderer>().material = targetObj.transform.Find("Ore").GetComponent<MeshRenderer>().material;
+                
                 jobState = "caryn";
                 targetObj.GetComponent<Resource>().cur = 0;
                 targetObj.GetComponent<Resource>().workerCount -= 1;
