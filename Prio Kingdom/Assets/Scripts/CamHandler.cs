@@ -13,6 +13,8 @@ public class CamHandler : MonoBehaviour
 
     public bool isDragable;
 
+    public GameObject selectedSlave;
+
     void Start()
     {
         
@@ -22,8 +24,10 @@ public class CamHandler : MonoBehaviour
     void Update()
     {
 
+        // Drag to move camera
         if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
+            selectedSlave = null;
             Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
@@ -34,7 +38,6 @@ public class CamHandler : MonoBehaviour
                 }
             }
         }
-
 
         if (onDrag && Input.GetTouch(0).phase == TouchPhase.Moved)
         {
@@ -54,6 +57,7 @@ public class CamHandler : MonoBehaviour
         }
 
 
+        // Pitch to zoom
         if (Input.touchCount == 2)
         {
             Touch touchZero = Input.GetTouch(0);
@@ -73,8 +77,12 @@ public class CamHandler : MonoBehaviour
             }
 
             transform.Translate(new Vector3(0, 0, difference) * Time.deltaTime, Space.Self);
+        }
 
-
+        // Follow slave
+        if (selectedSlave != null)
+        {
+            transform.position = new Vector3(selectedSlave.transform.position.x -10, transform.position.y, selectedSlave.transform.position.z -10);
         }
     }
 }

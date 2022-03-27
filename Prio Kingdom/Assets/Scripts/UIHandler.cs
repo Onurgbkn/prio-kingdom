@@ -142,4 +142,8 @@ public class UIHandler : MonoBehaviour
         buttonRej.gameObject.SetActive(false);
     }
 
+    public void SlaveSelected(GameObject slave) {
+        Camera.main.GetComponent<CamHandler>().selectedSlave = slave;
+
+    }
 }
