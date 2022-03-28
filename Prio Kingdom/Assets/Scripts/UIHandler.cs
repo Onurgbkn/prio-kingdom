@@ -16,6 +16,7 @@ public class UIHandler : MonoBehaviour
     public GameObject shopanel;
     public GameObject minePanel;
     public GameObject storagePanel;
+    public GameObject slavePanel;
 
     public Button buttonApr;
     public Button buttonRej;
@@ -23,6 +24,7 @@ public class UIHandler : MonoBehaviour
     public GameObject mine;
     public GameObject logolder;
     public GameObject storage;
+    public GameObject slave;
 
     public BuildHandler buildObj;
 
@@ -77,6 +79,7 @@ public class UIHandler : MonoBehaviour
         createdMine.transform.Find("Ore").GetComponent<MeshRenderer>().material = mat;
         createdMine.GetComponent<Resource>().type = type;
         shopanel.SetActive(false);
+        slavePanel.SetActive(false);
         Camera.main.GetComponent<CamHandler>().isDragable = true;
     }
 
@@ -85,6 +88,7 @@ public class UIHandler : MonoBehaviour
         Vector3 sp = new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z + 15);
         GameObject createdStorage = Instantiate(logolder, sp, Quaternion.Euler(0, -90, 0));
         shopanel.SetActive(false);
+        slavePanel.SetActive(false);
         Camera.main.GetComponent<CamHandler>().isDragable = true;
     }
 
@@ -116,6 +120,7 @@ public class UIHandler : MonoBehaviour
         createdStorage.transform.Find("Woody").GetComponent<MeshRenderer>().material = mat;
         createdStorage.GetComponent<Storage>().type = type;
         shopanel.SetActive(false);
+        slavePanel.SetActive(false);
         Camera.main.GetComponent<CamHandler>().isDragable = true;
     }
 
@@ -133,6 +138,8 @@ public class UIHandler : MonoBehaviour
 
         buttonApr.gameObject.SetActive(false);
         buttonRej.gameObject.SetActive(false);
+
+        slavePanel.SetActive(true);
     }
 
     public void BuildCanceled()
@@ -140,10 +147,18 @@ public class UIHandler : MonoBehaviour
         Destroy(buildObj.transform.parent.gameObject);
         buttonApr.gameObject.SetActive(false);
         buttonRej.gameObject.SetActive(false);
+
+        slavePanel.SetActive(true);
     }
 
     public void SlaveSelected(GameObject slave) {
         Camera.main.GetComponent<CamHandler>().selectedSlave = slave;
 
+    }
+
+    public void CreateSlave()
+    {
+        GameObject createdSlave = Instantiate(slave, new Vector3(100, 0, 100), Quaternion.identity);
+        createdSlave.transform.parent = GameObject.Find("Slaves").transform;
     }
 }

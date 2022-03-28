@@ -103,6 +103,7 @@ public class Slave : MonoBehaviour
                     return;
                 }
             }
+            agent.ResetPath();
             curJob = "idle";
             jobState = "idle";
         }
