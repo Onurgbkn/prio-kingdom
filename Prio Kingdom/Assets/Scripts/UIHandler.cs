@@ -17,9 +17,12 @@ public class UIHandler : MonoBehaviour
     public GameObject minePanel;
     public GameObject storagePanel;
     public GameObject slavePanel;
+    public GameObject jobsPanel;
 
     public Button buttonApr;
     public Button buttonRej;
+
+    public Button jobIcon;
 
     public GameObject mine;
     public GameObject logolder;
@@ -152,8 +155,14 @@ public class UIHandler : MonoBehaviour
     }
 
     public void SlaveSelected(GameObject slave) {
+        jobsPanel.SetActive(true);
         Camera.main.GetComponent<CamHandler>().selectedSlave = slave;
-
+        foreach (string job in slave.GetComponent<Slave>().jobs)
+        {
+            Button jobButton = Instantiate(jobIcon);
+            jobButton.transform.GetComponentInChildren<Text>().text = job;
+            jobButton.transform.SetParent(jobsPanel.transform);
+        }
     }
 
     public void CreateSlave()

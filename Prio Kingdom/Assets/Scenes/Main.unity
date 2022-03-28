@@ -714,8 +714,10 @@ MonoBehaviour:
   minePanel: {fileID: 890388609}
   storagePanel: {fileID: 1311243063}
   slavePanel: {fileID: 1418702823}
+  jobsPanel: {fileID: 2146031475}
   buttonApr: {fileID: 167150306}
   buttonRej: {fileID: 1903129188}
+  jobIcon: {fileID: 6414979116351064376, guid: 76b9dd57c714a1e4395a491adf749026, type: 3}
   mine: {fileID: 4419514371275327996, guid: 8e510e59104108b41b7def48483039ea, type: 3}
   logolder: {fileID: 5787792971558655975, guid: f0560ee0e25158f4392ff438781a5722, type: 3}
   storage: {fileID: 1825723079407650518, guid: 541cf2d8206628949bc962266d1fbb3e, type: 3}
@@ -5141,6 +5143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDragable: 1
   selectedSlave: {fileID: 0}
+  jobsPanel: {fileID: 2146031475}
 --- !u!1 &2082610614
 GameObject:
   m_ObjectHideFlags: 0
@@ -5292,7 +5295,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2146031476
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5309,8 +5312,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 462.5}
+  m_AnchoredPosition: {x: 0, y: 0.00014496}
+  m_SizeDelta: {x: 104.5053, y: 430.09}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &2146031477
 MonoBehaviour:
@@ -5325,12 +5328,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
+    m_Left: 5
+    m_Right: 5
+    m_Top: 5
+    m_Bottom: 5
   m_ChildAlignment: 0
-  m_Spacing: 0
+  m_Spacing: 5
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0

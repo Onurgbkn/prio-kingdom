@@ -14,6 +14,7 @@ public class CamHandler : MonoBehaviour
     public bool isDragable;
 
     public GameObject selectedSlave;
+    public GameObject jobsPanel;
 
     void Start()
     {
@@ -28,6 +29,9 @@ public class CamHandler : MonoBehaviour
         if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
             selectedSlave = null;
+
+            jobsPanel.SetActive(false);
+
             Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
