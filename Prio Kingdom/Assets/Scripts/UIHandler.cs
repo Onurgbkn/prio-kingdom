@@ -211,13 +211,25 @@ public class UIHandler : MonoBehaviour
 
     public void JobIronMine()
     {
+        AddJob("iron");
+    }
+
+    public void JobCopperMine()
+    {
+        AddJob("copper");
+    }
+
+
+    private void AddJob(string job)
+    {
         GameObject slave = Camera.main.GetComponent<CamHandler>().selectedSlave;
-        if (slave && !slave.GetComponent<Slave>().jobs.Contains("iron"))
+        if (slave && !slave.GetComponent<Slave>().jobs.Contains(job))
         {
-            slave.GetComponent<Slave>().jobs.Add("iron");
+            slave.GetComponent<Slave>().jobs.Add(job);
             SlaveSelected(slave);
         }
     }
+
     private void RemoveJob(string job, GameObject slave)
     {
         slave.GetComponent<Slave>().jobs.Remove(job);
