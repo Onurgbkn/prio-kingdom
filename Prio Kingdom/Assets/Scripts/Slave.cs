@@ -21,17 +21,9 @@ public class Slave : MonoBehaviour
     public GameObject axe;
     public GameObject ore;
 
-    public Button icon;
 
     private void Start()
     {
-        //ui
-        Button iconObj = Instantiate(icon);
-        iconObj.transform.SetParent(GameObject.Find("Slave Panel").transform.Find("Cont"));
-        iconObj.transform.localScale = new Vector3(1, 1, 1);
-        iconObj.onClick.AddListener(delegate { reshand.transform.Find("UI").GetComponent<UIHandler>().SlaveSelected(gameObject);});
-        //ui
-
         ColorHandler();
         reshand = GameObject.Find("GameHandler").GetComponent<ResourceHandler>();
         reshand.slaves.Add(this);

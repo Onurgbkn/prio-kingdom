@@ -198,13 +198,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jobs:
   - copper
+  - iron
   curJob: 
   jobState: 
   near2target: 0
   targetObj: {fileID: 0}
   axe: {fileID: 0}
   ore: {fileID: 1327684660027094214}
-  icon: {fileID: 2356031662607280691, guid: 3b993620944f20145aaa64102df6399a, type: 3}
+  icon: {fileID: 5309429571217138800, guid: 3b993620944f20145aaa64102df6399a, type: 3}
 --- !u!195 &2210576890713544626
 NavMeshAgent:
   m_ObjectHideFlags: 0

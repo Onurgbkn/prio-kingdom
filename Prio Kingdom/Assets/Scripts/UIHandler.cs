@@ -18,11 +18,14 @@ public class UIHandler : MonoBehaviour
     public GameObject storagePanel;
     public GameObject slavePanel;
     public GameObject jobsPanel;
+    public GameObject addJobPanel;
 
     public Button buttonApr;
     public Button buttonRej;
 
-    public Button jobIcon;
+    public GameObject jobIcon;
+    public Button slaveIcon;
+
 
     public GameObject mine;
     public GameObject logolder;
@@ -157,11 +160,20 @@ public class UIHandler : MonoBehaviour
     public void SlaveSelected(GameObject slave) {
         jobsPanel.SetActive(true);
         Camera.main.GetComponent<CamHandler>().selectedSlave = slave;
+
+        foreach (Transform child in jobsPanel.transform.Find("Cont"))
+        {
+            Destroy(child.gameObject);
+        }
+
         foreach (string job in slave.GetComponent<Slave>().jobs)
         {
-            Button jobButton = Instantiate(jobIcon);
-            jobButton.transform.GetComponentInChildren<Text>().text = job;
-            jobButton.transform.SetParent(jobsPanel.transform);
+            GameObject jobItem = Instantiate(jobIcon);
+            jobItem.transform.SetParent(jobsPanel.transform.Find("Cont"));
+            jobItem.transform.localScale = new Vector3(1, 1, 1);
+
+            jobItem.transform.GetChild(0).GetComponentInChildren<Text>().text = job;
+            jobItem.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(delegate { RemoveJob(job, slave); });
         }
     }
 
@@ -169,5 +181,46 @@ public class UIHandler : MonoBehaviour
     {
         GameObject createdSlave = Instantiate(slave, new Vector3(100, 0, 100), Quaternion.identity);
         createdSlave.transform.parent = GameObject.Find("Slaves").transform;
+
+        Button iconObj = Instantiate(slaveIcon);
+        iconObj.transform.SetParent(slavePanel.transform.Find("Cont"));
+        iconObj.transform.localScale = new Vector3(1, 1, 1);
+        iconObj.onClick.AddListener(delegate { SlaveSelected(createdSlave); });
+    }
+
+    public void ToggleSlavePanel()
+    {
+        if (slavePanel.activeSelf)
+        {
+            slavePanel.SetActive(false);
+        }
+        else
+        {
+            slavePanel.SetActive(true);
+        }
+    }
+
+    public void ShowAddJobPanel()
+    {
+        addJobPanel.SetActive(true);
+    }
+    public void HideAddJobPanel()
+    {
+        addJobPanel.SetActive(false);
+    }
+
+    public void JobIronMine()
+    {
+        GameObject slave = Camera.main.GetComponent<CamHandler>().selectedSlave;
+        if (slave && !slave.GetComponent<Slave>().jobs.Contains("iron"))
+        {
+            slave.GetComponent<Slave>().jobs.Add("iron");
+            SlaveSelected(slave);
+        }
+    }
+    private void RemoveJob(string job, GameObject slave)
+    {
+        slave.GetComponent<Slave>().jobs.Remove(job);
+        SlaveSelected(slave);
     }
 }
