@@ -18,7 +18,7 @@ public class Slave : MonoBehaviour
 
     public GameObject targetObj;
 
-    public GameObject axe;
+    public GameObject pickaxe;
     public GameObject ore;
 
 
@@ -41,6 +41,7 @@ public class Slave : MonoBehaviour
             animator.SetBool("workn", false);
             animator.SetBool("caryn", false);
             ore.SetActive(false);
+            pickaxe.SetActive(false);
         }
         else if (jobState == "caryn" && !animator.GetBool("caryn"))
         {
@@ -48,6 +49,7 @@ public class Slave : MonoBehaviour
             animator.SetBool("workn", false);
             animator.SetBool("caryn", true);
             ore.SetActive(true);
+            pickaxe.SetActive(false);
         }
         else if (jobState == "workn" && !animator.GetBool("workn"))
         {
@@ -55,6 +57,7 @@ public class Slave : MonoBehaviour
             animator.SetBool("workn", true);
             animator.SetBool("caryn", false);
             ore.SetActive(false);
+            pickaxe.SetActive(true);
 
         }
         else if ((jobState == "begin2job" || jobState == "idle"))
@@ -63,15 +66,16 @@ public class Slave : MonoBehaviour
             animator.SetBool("workn", false);
             animator.SetBool("caryn", false);
             ore.SetActive(false);
+            pickaxe.SetActive(false);
         }
     }
 
     private void ColorHandler()
     {
-        transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
         transform.GetChild(2).GetComponent<SkinnedMeshRenderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
         transform.GetChild(3).GetComponent<SkinnedMeshRenderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
         transform.GetChild(4).GetComponent<SkinnedMeshRenderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+        transform.GetChild(5).GetComponent<SkinnedMeshRenderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
     }
 
     public void GetJob()
@@ -137,6 +141,7 @@ public class Slave : MonoBehaviour
                     {
                         near2target = false;
                         agent.ResetPath();
+                        transform.LookAt(targetObj.transform.position);
                         jobState = "workn";
                         targetObj.GetComponent<Resource>().workerCount += 1;
                         reshand.GetJob4Slave();
