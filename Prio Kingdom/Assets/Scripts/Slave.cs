@@ -20,6 +20,8 @@ public class Slave : MonoBehaviour
 
     public GameObject pickaxe;
     public GameObject ore;
+    public GameObject axe;
+    public GameObject log;
 
 
     private void Start()
@@ -38,35 +40,56 @@ public class Slave : MonoBehaviour
         if (jobState == "movn2source" && !animator.GetBool("walkn"))
         {
             animator.SetBool("walkn", true);
-            animator.SetBool("workn", false);
+            animator.SetBool("minen", false);
             animator.SetBool("caryn", false);
+            animator.SetBool("felln", false);
             ore.SetActive(false);
+            log.SetActive(false);
             pickaxe.SetActive(false);
+            axe.SetActive(false);
         }
         else if (jobState == "caryn" && !animator.GetBool("caryn"))
         {
             animator.SetBool("walkn", false);
-            animator.SetBool("workn", false);
+            animator.SetBool("minen", false);
+            animator.SetBool("felln", false);
             animator.SetBool("caryn", true);
-            ore.SetActive(true);
-            pickaxe.SetActive(false);
+            if (curJob == "wood")
+            {
+                log.SetActive(true);
+                axe.SetActive(false);
+            }
+            else
+            {
+                ore.SetActive(true);
+                pickaxe.SetActive(false);
+            }
         }
-        else if (jobState == "workn" && !animator.GetBool("workn"))
+        else if (jobState == "workn" && (!animator.GetBool("minen") || !animator.GetBool("felln")))
         {
             animator.SetBool("walkn", false);
-            animator.SetBool("workn", true);
             animator.SetBool("caryn", false);
-            ore.SetActive(false);
-            pickaxe.SetActive(true);
-
+            if (curJob == "wood")
+            {
+                animator.SetBool("felln", true);
+                axe.SetActive(true);
+            }
+            else
+            {
+                animator.SetBool("minen", true);
+                pickaxe.SetActive(true);
+            }
         }
         else if ((jobState == "begin2job" || jobState == "idle"))
         {
             animator.SetBool("walkn", false);
-            animator.SetBool("workn", false);
+            animator.SetBool("minen", false);
             animator.SetBool("caryn", false);
-            ore.SetActive(false);
+            animator.SetBool("felln", false);
             pickaxe.SetActive(false);
+            axe.SetActive(false);
+            ore.SetActive(false);
+            log.SetActive(false);
         }
     }
 
@@ -153,16 +176,15 @@ public class Slave : MonoBehaviour
                 }
             }
         }
-        else if (jobState == "workn")
+        else if (jobState == "workn") // starts carrying
         {
             if (targetObj.GetComponent<Resource>().cur == targetObj.GetComponent<Resource>().max)
-            {
-                ore.GetComponent<MeshRenderer>().material = targetObj.transform.Find("Ore").GetComponent<MeshRenderer>().material;
-                
+            {           
                 jobState = "caryn";
                 targetObj.GetComponent<Resource>().cur = 0;
                 targetObj.GetComponent<Resource>().workerCount -= 1;
                 if (type == "wood") Destroy(targetObj);
+                else ore.GetComponent<MeshRenderer>().material = targetObj.transform.Find("Ore").GetComponent<MeshRenderer>().material;
                 reshand.GetJob4Slave();
             }
         }
@@ -210,5 +232,10 @@ public class Slave : MonoBehaviour
         {
             near2target = false;
         }
+    }
+
+    public void ResourceUp()
+    {
+        targetObj.GetComponent<Resource>().AddSource();
     }
 }

@@ -21,16 +21,6 @@ public class ResourceHandler : MonoBehaviour
         UpdateJobs();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown("space"))
-        {
-            Debug.Log("space pressed");
-            GetJob4Slave();
-        }
-    }
-
-
     IEnumerator SpawnTrees() // coroutine
     {
         while (true)

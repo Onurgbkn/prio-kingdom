@@ -30,16 +30,15 @@ public class Resource : MonoBehaviour
 
     }
 
-
-    private void Update()
+    public void AddSource()
     {
         if (cur < max)
         {
-            progress += workerCount * Time.deltaTime * 0.5f;
+            progress += 0.5f;
             if (progress > 1)
             {
                 progress--;
-                cur ++;
+                cur++;
             }
             if (cur == max)
             {

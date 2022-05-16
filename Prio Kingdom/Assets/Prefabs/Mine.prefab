@@ -236,7 +236,6 @@ MonoBehaviour:
   workerCount: 0
   maxWorker: 1
   progress: 0
-  nearest_storage: {fileID: 0}
 --- !u!208 &5716250804972893387
 NavMeshObstacle:
   m_ObjectHideFlags: 0

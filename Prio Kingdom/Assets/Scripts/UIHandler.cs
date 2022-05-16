@@ -186,6 +186,8 @@ public class UIHandler : MonoBehaviour
         iconObj.transform.SetParent(slavePanel.transform.Find("Cont"));
         iconObj.transform.localScale = new Vector3(1, 1, 1);
         iconObj.onClick.AddListener(delegate { SlaveSelected(createdSlave); });
+
+        SlaveSelected(createdSlave);
     }
 
     public void ToggleSlavePanel()
@@ -219,6 +221,11 @@ public class UIHandler : MonoBehaviour
         AddJob("copper");
     }
 
+    public void JobFellTree()
+    {
+        AddJob("wood");
+    }
+
 
     private void AddJob(string job)
     {
@@ -226,7 +233,8 @@ public class UIHandler : MonoBehaviour
         if (slave && !slave.GetComponent<Slave>().jobs.Contains(job))
         {
             slave.GetComponent<Slave>().jobs.Add(job);
-            SlaveSelected(slave);
+            SlaveSelected(slave); // Not sure we need this
+            slave.GetComponent<Slave>().GetJob();
         }
     }
 
@@ -234,5 +242,6 @@ public class UIHandler : MonoBehaviour
     {
         slave.GetComponent<Slave>().jobs.Remove(job);
         SlaveSelected(slave);
+        slave.GetComponent<Slave>().GetJob();
     }
 }

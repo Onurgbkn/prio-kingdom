@@ -28,16 +28,19 @@ public class CamHandler : MonoBehaviour
         // Drag to move camera
         if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
-            selectedSlave = null;
-            jobsPanel.SetActive(false);
-
-            Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
+            if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId)) // Check if clickted on ui
             {
-                if (hit.collider.GetComponent<BuildHandler>() == null && isDragable)
+                selectedSlave = null;
+                jobsPanel.SetActive(false);
+
+                Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit))
                 {
-                    onDrag = true;
+                    if (hit.collider.GetComponent<BuildHandler>() == null && isDragable)
+                    {
+                        onDrag = true;
+                    }
                 }
             }
         }

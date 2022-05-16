@@ -47,7 +47,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.5
+  m_Radius: 4
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!208 &5397298723257276081
 NavMeshObstacle:
@@ -59,7 +59,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_Extents: {x: 1, y: 0.5, z: 1}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -95,7 +95,6 @@ MonoBehaviour:
   workerCount: 0
   maxWorker: 1
   progress: 0
-  nearest_storage: {fileID: 0}
 --- !u!1 &6392275027384413655
 GameObject:
   m_ObjectHideFlags: 0
