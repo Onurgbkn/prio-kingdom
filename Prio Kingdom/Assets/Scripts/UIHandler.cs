@@ -30,6 +30,7 @@ public class UIHandler : MonoBehaviour
     public GameObject mine;
     public GameObject logolder;
     public GameObject storage;
+    public GameObject farm;
     public GameObject slave;
 
     public BuildHandler buildObj;
@@ -84,6 +85,15 @@ public class UIHandler : MonoBehaviour
         GameObject createdMine = Instantiate(mine, sp, Quaternion.Euler(0, -90, 0));
         createdMine.transform.Find("Ore").GetComponent<MeshRenderer>().material = mat;
         createdMine.GetComponent<Resource>().type = type;
+        shopanel.SetActive(false);
+        slavePanel.SetActive(false);
+        Camera.main.GetComponent<CamHandler>().isDragable = true;
+    }
+
+    public void SpawnFarm()
+    {
+        Vector3 sp = new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z + 15);
+        GameObject createdFarm = Instantiate(farm, sp, Quaternion.Euler(0, -90, 0));
         shopanel.SetActive(false);
         slavePanel.SetActive(false);
         Camera.main.GetComponent<CamHandler>().isDragable = true;
@@ -224,6 +234,11 @@ public class UIHandler : MonoBehaviour
     public void JobFellTree()
     {
         AddJob("wood");
+    }
+
+    public void JobFarming()
+    {
+        AddJob("food");
     }
 
 

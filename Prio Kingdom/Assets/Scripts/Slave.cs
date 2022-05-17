@@ -43,6 +43,7 @@ public class Slave : MonoBehaviour
             animator.SetBool("minen", false);
             animator.SetBool("caryn", false);
             animator.SetBool("felln", false);
+            animator.SetBool("farmn", false);
             ore.SetActive(false);
             log.SetActive(false);
             pickaxe.SetActive(false);
@@ -65,7 +66,7 @@ public class Slave : MonoBehaviour
                 pickaxe.SetActive(false);
             }
         }
-        else if (jobState == "workn" && (!animator.GetBool("minen") || !animator.GetBool("felln")))
+        else if (jobState == "workn" && !(animator.GetBool("minen") || animator.GetBool("felln") || animator.GetBool("farmn")))
         {
             animator.SetBool("walkn", false);
             animator.SetBool("caryn", false);
@@ -73,6 +74,10 @@ public class Slave : MonoBehaviour
             {
                 animator.SetBool("felln", true);
                 axe.SetActive(true);
+            }
+            else if (curJob == "food")
+            {
+                animator.SetBool("farmn", true);
             }
             else
             {
@@ -86,6 +91,7 @@ public class Slave : MonoBehaviour
             animator.SetBool("minen", false);
             animator.SetBool("caryn", false);
             animator.SetBool("felln", false);
+            animator.SetBool("farmn", false);
             pickaxe.SetActive(false);
             axe.SetActive(false);
             ore.SetActive(false);
@@ -147,7 +153,7 @@ public class Slave : MonoBehaviour
                 GetJob();
             }
         }
-        else if (jobState == "movn2source")
+        else if (jobState == "movn2source") // starts workn
         {
             targetObj = reshand.FindSource(type, transform.position);
             if (targetObj == null)

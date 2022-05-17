@@ -5,7 +5,7 @@ using UnityEngine;
 [SelectionBase]
 public class Resource : MonoBehaviour
 {
-    public enum ResourceType { wood, iron, copper, stone, gold };
+    public enum ResourceType { grow, wood, iron, copper, stone, gold, food };
     public ResourceType type;
 
     public int max; // max resource capacity held
@@ -26,8 +26,14 @@ public class Resource : MonoBehaviour
         reshand.resources.Add(this);
         reshand.UpdateJobs();
         reshand.GetJob4Slave();
-        GetComponent<SphereCollider>().enabled = true;
-
+        if (type.ToString() == "grow")
+        {
+            GetComponent<BoxCollider>().enabled = true;
+        }
+        else
+        {
+            GetComponent<SphereCollider>().enabled = true;
+        }
     }
 
     public void AddSource()
@@ -42,6 +48,10 @@ public class Resource : MonoBehaviour
             }
             if (cur == max)
             {
+                if (type.ToString() == "food")
+                {
+                    GetComponent<PlumpkinGrow>().Begin2Grow();
+                }
                 reshand.GetJob4Slave();
             }
         }
@@ -58,7 +68,6 @@ public class Resource : MonoBehaviour
         {
             reshand.resources.Remove(this);
             reshand.UpdateJobs();
-            //reshand.SpawnTrees();
         }
     }
 }

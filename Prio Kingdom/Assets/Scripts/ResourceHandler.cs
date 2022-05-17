@@ -113,5 +113,4 @@ public class ResourceHandler : MonoBehaviour
         }
         return storage;
     }
-
 }

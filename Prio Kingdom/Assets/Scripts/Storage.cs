@@ -5,7 +5,7 @@ using UnityEngine;
 [SelectionBase]
 public class Storage : MonoBehaviour
 {
-    public enum ResourceType { wood, iron, copper, stone, gold };
+    public enum ResourceType { wood, iron, copper, stone, gold, food };
     public ResourceType type;
 
     public int max;
@@ -18,7 +18,7 @@ public class Storage : MonoBehaviour
         reshand.storages.Add(this);
         reshand.UpdateJobs();
         reshand.GetJob4Slave();
-        GetComponent<BoxCollider>().enabled = true;
+        if (type != ResourceType.food) GetComponent<BoxCollider>().enabled = true;
     }
 
     public void AddResource(int amount)
