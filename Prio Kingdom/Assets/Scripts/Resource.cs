@@ -51,6 +51,8 @@ public class Resource : MonoBehaviour
                 if (type.ToString() == "food")
                 {
                     GetComponent<PlumpkinGrow>().Begin2Grow();
+                    workerCount = 0;
+                    Camera.main.GetComponent<SourceCounter>().AddFood(9);
                 }
                 reshand.GetJob4Slave();
             }

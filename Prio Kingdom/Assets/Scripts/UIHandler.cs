@@ -88,6 +88,8 @@ public class UIHandler : MonoBehaviour
         shopanel.SetActive(false);
         slavePanel.SetActive(false);
         Camera.main.GetComponent<CamHandler>().isDragable = true;
+
+        createdMine.transform.SetParent(GameObject.Find("Mines").transform);
     }
 
     public void SpawnFarm()
@@ -97,6 +99,8 @@ public class UIHandler : MonoBehaviour
         shopanel.SetActive(false);
         slavePanel.SetActive(false);
         Camera.main.GetComponent<CamHandler>().isDragable = true;
+
+        createdFarm.transform.SetParent(GameObject.Find("Mines").transform);
     }
 
     public void SpawnLogHolder()
@@ -106,6 +110,8 @@ public class UIHandler : MonoBehaviour
         shopanel.SetActive(false);
         slavePanel.SetActive(false);
         Camera.main.GetComponent<CamHandler>().isDragable = true;
+
+        createdStorage.transform.SetParent(GameObject.Find("Storages").transform);
     }
 
     public void SpawnIronStorage()
@@ -138,6 +144,8 @@ public class UIHandler : MonoBehaviour
         shopanel.SetActive(false);
         slavePanel.SetActive(false);
         Camera.main.GetComponent<CamHandler>().isDragable = true;
+
+        createdStorage.transform.SetParent(GameObject.Find("Storages").transform);
     }
 
 
