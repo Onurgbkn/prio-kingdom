@@ -322,7 +322,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 15, y: -285}
+  m_AnchoredPosition: {x: 15, y: -245}
   m_SizeDelta: {x: 140, y: 140}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &40396543
@@ -371,7 +371,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 208225917}
         m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
-        m_MethodName: SpawnIronMine
+        m_MethodName: SpawnFarm
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -532,7 +532,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 180, y: -100}
+  m_AnchoredPosition: {x: 180, y: -80}
   m_SizeDelta: {x: 140, y: 140}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &56093557
@@ -581,7 +581,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 208225917}
         m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
-        m_MethodName: SpawnIronMine
+        m_MethodName: SpawnCopperMine
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -738,7 +738,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 15, y: -100}
+  m_AnchoredPosition: {x: 15, y: -80}
   m_SizeDelta: {x: 140, y: 140}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &132432835
@@ -787,7 +787,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 208225917}
         m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
-        m_MethodName: SpawnIronMine
+        m_MethodName: SpawnIronStorage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1633,7 +1633,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 345, y: -100}
+  m_AnchoredPosition: {x: 345, y: -80}
   m_SizeDelta: {x: 140, y: 140}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &325571398
@@ -1682,7 +1682,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 208225917}
         m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
-        m_MethodName: SpawnIronMine
+        m_MethodName: SpawnGoldMine
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2051,7 +2051,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 208225917}
         m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
-        m_MethodName: JobIronMine
+        m_MethodName: JobFellTree
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2664,7 +2664,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 208225917}
         m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
-        m_MethodName: JobIronMine
+        m_MethodName: JobGoldMine
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3484,7 +3484,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 208225917}
         m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
-        m_MethodName: JobIronMine
+        m_MethodName: JobCopperMine
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3703,7 +3703,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 345, y: -100}
+  m_AnchoredPosition: {x: 345, y: -80}
   m_SizeDelta: {x: 140, y: 140}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &706094119
@@ -3752,7 +3752,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 208225917}
         m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
-        m_MethodName: SpawnIronMine
+        m_MethodName: SpawnGoldStorage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4020,7 +4020,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 208225917}
         m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
-        m_MethodName: JobIronMine
+        m_MethodName: JobFarming
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4184,7 +4184,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 180, y: -100}
+  m_AnchoredPosition: {x: 180, y: -80}
   m_SizeDelta: {x: 140, y: 140}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &829781464
@@ -4233,7 +4233,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 208225917}
         m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
-        m_MethodName: SpawnIronMine
+        m_MethodName: SpawnCopperStorage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4541,8 +4541,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.84400004}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -2.350006}
+  m_SizeDelta: {x: 0, y: -4.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &890388611
 MonoBehaviour:
@@ -4662,7 +4662,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 15, y: -100}
+  m_AnchoredPosition: {x: 15, y: -80}
   m_SizeDelta: {x: 140, y: 140}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &892384552
@@ -5034,7 +5034,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 15, y: -285}
+  m_AnchoredPosition: {x: 15, y: -245}
   m_SizeDelta: {x: 140, y: 140}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &978467324
@@ -5083,7 +5083,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 208225917}
         m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
-        m_MethodName: SpawnIronMine
+        m_MethodName: SpawnLogHolder
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5380,7 +5380,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 7}
+  m_AnchoredPosition: {x: 0, y: -32.2}
   m_SizeDelta: {x: 500, y: 255.09}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1028721584
@@ -6102,7 +6102,7 @@ GameObject:
   - component: {fileID: 1186510878}
   - component: {fileID: 1186510877}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Add Job Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7894,8 +7894,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.0009613037}
-  m_SizeDelta: {x: 0, y: 26.299988}
+  m_AnchoredPosition: {x: 0, y: -90.535576}
+  m_SizeDelta: {x: 0, y: 181.06921}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1747864126
 MonoBehaviour:
@@ -7926,13 +7926,13 @@ MonoBehaviour:
   m_Padding:
     m_Left: 15
     m_Right: 0
-    m_Top: 30
+    m_Top: 10
     m_Bottom: 30
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 140, y: 140}
-  m_Spacing: {x: 25, y: 45}
+  m_Spacing: {x: 25, y: 25}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!1 &1755415351
@@ -8241,8 +8241,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.00062561035}
-  m_SizeDelta: {x: 0, y: 26.299988}
+  m_AnchoredPosition: {x: 0, y: -92.88464}
+  m_SizeDelta: {x: 0, y: 185.76921}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1818970344
 MonoBehaviour:
@@ -8259,13 +8259,13 @@ MonoBehaviour:
   m_Padding:
     m_Left: 15
     m_Right: 0
-    m_Top: 30
+    m_Top: 10
     m_Bottom: 30
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 140, y: 140}
-  m_Spacing: {x: 25, y: 45}
+  m_Spacing: {x: 25, y: 25}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!114 &1818970345
@@ -9214,7 +9214,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodCount: 0
-  foodElem: {fileID: 0}
+  woodCount: 0
+  ironCount: 0
+  copperCount: 0
+  goldCount: 0
+  foodElem: {fileID: 998056738}
+  woodElem: {fileID: 505997653}
+  ironElem: {fileID: 284445327}
+  copperElem: {fileID: 619919763}
+  goldElem: {fileID: 295390683}
 --- !u!1 &2051639395
 GameObject:
   m_ObjectHideFlags: 0

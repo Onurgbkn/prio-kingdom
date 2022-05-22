@@ -32,7 +32,12 @@ public class Storage : MonoBehaviour
         else
         {
             cur += amount;
-            if (cur > max) cur = max;
+            if (cur > max)
+            {
+                amount = max - cur;
+                cur = max;
+                
+            }
             reshand.UpdateJobs();
             reshand.GetJob4Slave();
         }
@@ -64,6 +69,24 @@ public class Storage : MonoBehaviour
             transform.Find(subtype + " 1").gameObject.SetActive(true);
             transform.Find(subtype + " 2").gameObject.SetActive(true);
             transform.Find(subtype + " 3").gameObject.SetActive(true);
+        }
+
+
+        if (type.ToString() == "wood")
+        {
+            Camera.main.GetComponent<SourceCounter>().AddWood(amount);
+        }
+        else if (type.ToString() == "iron")
+        {
+            Camera.main.GetComponent<SourceCounter>().AddIron(amount);
+        }
+        else if (type.ToString() == "copper")
+        {
+            Camera.main.GetComponent<SourceCounter>().AddCopper(amount);
+        }
+        else if (type.ToString() == "gold")
+        {
+            Camera.main.GetComponent<SourceCounter>().AddGold(amount);
         }
     }
 }

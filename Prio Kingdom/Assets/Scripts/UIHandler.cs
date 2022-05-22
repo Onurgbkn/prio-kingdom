@@ -238,6 +238,10 @@ public class UIHandler : MonoBehaviour
     {
         AddJob("copper");
     }
+    public void JobGoldMine()
+    {
+        AddJob("gold");
+    }
 
     public void JobFellTree()
     {
