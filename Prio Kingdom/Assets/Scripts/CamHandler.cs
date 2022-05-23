@@ -16,10 +16,6 @@ public class CamHandler : MonoBehaviour
     public GameObject selectedSlave;
     public GameObject jobsPanel;
 
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -53,7 +49,16 @@ public class CamHandler : MonoBehaviour
             {
                 dragPos = new Vector3(Input.GetTouch(0).deltaPosition.x * camSpeed, 0, Input.GetTouch(0).deltaPosition.y * camSpeed);
                 dragPos = Quaternion.Euler(0, 45, 0) * dragPos * Time.deltaTime;
-                transform.position = new Vector3(transform.position.x - dragPos.x, transform.position.y, transform.position.z - dragPos.z);
+
+                bool leftmost = dragPos.x > 0 && transform.position.x - dragPos.x < -500;
+                bool rightmost = dragPos.x < 0 && transform.position.x - dragPos.x > 500;
+                bool botmost = dragPos.z > 0 && transform.position.z - dragPos.z < -500;
+                bool topmost = dragPos.z < 0 && transform.position.z - dragPos.z > 500;
+
+                if (!(leftmost || rightmost || topmost || botmost))
+                {
+                    transform.position = new Vector3(transform.position.x - dragPos.x, transform.position.y, transform.position.z - dragPos.z);
+                }
             }
         }
 
@@ -77,7 +82,7 @@ public class CamHandler : MonoBehaviour
 
             float difference = (currentMagnitude - prevMagnitude) * 2;
 
-            if ((transform.position.y >60 && difference < 0) || (transform.position.y < 15 && difference > 0))
+            if ((transform.position.y >80 && difference < 0) || (transform.position.y < 15 && difference > 0))
             {
                 difference = 0;
             }

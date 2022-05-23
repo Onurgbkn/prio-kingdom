@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,7 @@ public class UIHandler : MonoBehaviour
     public GameObject shopanel;
     public GameObject minePanel;
     public GameObject storagePanel;
+    public GameObject addWorkerPanel;
     public GameObject slavePanel;
     public GameObject jobsPanel;
     public GameObject addJobPanel;
@@ -24,14 +26,12 @@ public class UIHandler : MonoBehaviour
     public Button buttonRej;
 
     public GameObject jobIcon;
-    public Button slaveIcon;
 
 
     public GameObject mine;
     public GameObject logolder;
     public GameObject storage;
     public GameObject farm;
-    public GameObject slave;
 
     public BuildHandler buildObj;
 
@@ -39,24 +39,35 @@ public class UIHandler : MonoBehaviour
     {
         shopanel.SetActive(true);
         Camera.main.GetComponent<CamHandler>().isDragable = false;
+        slavePanel.SetActive(false);
     }
 
     public void HideShopPanel()
     {
         shopanel.SetActive(false);
         Camera.main.GetComponent<CamHandler>().isDragable = true;
+        slavePanel.SetActive(true);
     }
 
     public void ShowMines()
     {
         minePanel.SetActive(true);
         storagePanel.SetActive(false);
+        addWorkerPanel.SetActive(false);
     }
 
     public void ShowStorages()
     {
         minePanel.SetActive(false);
         storagePanel.SetActive(true);
+        addWorkerPanel.SetActive(false);
+    }
+
+    public void ShowWorker()
+    {
+        minePanel.SetActive(false);
+        storagePanel.SetActive(false);
+        addWorkerPanel.SetActive(true);
     }
 
     public void SpawnIronMine()
@@ -178,6 +189,7 @@ public class UIHandler : MonoBehaviour
     public void SlaveSelected(GameObject slave) {
         jobsPanel.SetActive(true);
         Camera.main.GetComponent<CamHandler>().selectedSlave = slave;
+        Camera.main.GetComponent<CamHandler>().isDragable = true;
 
         foreach (Transform child in jobsPanel.transform.Find("Cont"))
         {
@@ -190,22 +202,9 @@ public class UIHandler : MonoBehaviour
             jobItem.transform.SetParent(jobsPanel.transform.Find("Cont"));
             jobItem.transform.localScale = new Vector3(1, 1, 1);
 
-            jobItem.transform.GetChild(0).GetComponentInChildren<Text>().text = job;
+            jobItem.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text = job;
             jobItem.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(delegate { RemoveJob(job, slave); });
         }
-    }
-
-    public void CreateSlave()
-    {
-        GameObject createdSlave = Instantiate(slave, new Vector3(100, 0, 100), Quaternion.identity);
-        createdSlave.transform.parent = GameObject.Find("Slaves").transform;
-
-        Button iconObj = Instantiate(slaveIcon);
-        iconObj.transform.SetParent(slavePanel.transform.Find("Cont"));
-        iconObj.transform.localScale = new Vector3(1, 1, 1);
-        iconObj.onClick.AddListener(delegate { SlaveSelected(createdSlave); });
-
-        SlaveSelected(createdSlave);
     }
 
     public void ToggleSlavePanel()

@@ -23,10 +23,11 @@ public class Slave : MonoBehaviour
     public GameObject axe;
     public GameObject log;
 
+    public string wname;
 
     private void Start()
     {
-        ColorHandler();
+        //ColorHandler();
         reshand = GameObject.Find("GameHandler").GetComponent<ResourceHandler>();
         reshand.slaves.Add(this);
         animator = GetComponent<Animator>();
