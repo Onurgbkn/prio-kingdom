@@ -25,7 +25,7 @@ public class ResourceHandler : MonoBehaviour
     {
         while (true)
         {
-            if (GameObject.Find("Forest").transform.childCount < 10)
+            if (GameObject.Find("Forest").transform.childCount < 20)
             {
                 int x = Random.Range(-90, 90);
                 int z = Random.Range(-90, 90);
@@ -42,7 +42,7 @@ public class ResourceHandler : MonoBehaviour
                     tree.transform.parent = GameObject.Find("Forest").transform;
                 }
             }
-            yield return new WaitForSeconds(30f);
+            yield return new WaitForSeconds(15f);
         }
     }
 
@@ -112,5 +112,27 @@ public class ResourceHandler : MonoBehaviour
             }
         }
         return storage;
+    }
+
+    public void GetSource(string type, int amount)
+    {
+        foreach (Storage s in storages)
+        {
+            if (s.type.ToString() == type && s.cur > 0)
+            {
+                if (s.cur < amount)
+                {
+                    amount -= s.cur;
+                    s.cur = 0;
+                    s.AddResource(0);
+                }
+                else
+                {
+                    s.cur -= amount;
+                    s.AddResource(0);
+                    break;
+                }
+            }
+        }
     }
 }

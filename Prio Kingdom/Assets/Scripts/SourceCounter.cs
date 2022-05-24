@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class SourceCounter : MonoBehaviour
 {
@@ -45,6 +44,36 @@ public class SourceCounter : MonoBehaviour
     public void AddGold(int count)
     {
         goldCount += count;
+        goldElem.text = goldCount.ToString();
+    }
+
+    public void GetFood(int count)
+    {
+        foodCount -= count;
+        foodElem.text = foodCount.ToString();
+    }
+
+    public void GetWood(int count)
+    {
+        woodCount -= count;
+        woodElem.text = woodCount.ToString();
+    }
+
+    public void GetIron(int count)
+    {
+        ironCount -= count;
+        ironElem.text = ironCount.ToString();
+    }
+
+    public void GetCopper(int count)
+    {
+        copperCount -= count;
+        copperElem.text = copperCount.ToString();
+    }
+
+    public void GetGold(int count)
+    {
+        goldCount -= count;
         goldElem.text = goldCount.ToString();
     }
 }

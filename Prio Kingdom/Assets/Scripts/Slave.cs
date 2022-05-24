@@ -185,8 +185,13 @@ public class Slave : MonoBehaviour
         }
         else if (jobState == "workn") // starts carrying
         {
+            if (curJob == "food" && targetObj.GetComponent<Resource>().type.ToString() == "grow")
+            {
+                jobState = "begin2job";
+            }
+            
             if (targetObj.GetComponent<Resource>().cur == targetObj.GetComponent<Resource>().max)
-            {           
+            {
                 jobState = "caryn";
                 targetObj.GetComponent<Resource>().cur = 0;
                 targetObj.GetComponent<Resource>().workerCount -= 1;

@@ -34,6 +34,7 @@ public class UIHandler : MonoBehaviour
     public GameObject farm;
 
     public BuildHandler buildObj;
+    public SourceCounter sc;
 
     public void ShowShopPanel()
     {
@@ -72,22 +73,26 @@ public class UIHandler : MonoBehaviour
 
     public void SpawnIronMine()
     {
-        SpawnMine(Resource.ResourceType.iron, iron);
+        if (sc.woodCount >= 10)
+        {
+            SpawnMine(Resource.ResourceType.iron, iron);
+        }
     }
 
     public void SpawnCopperMine()
     {
-        SpawnMine(Resource.ResourceType.copper, copper);
-    }
-
-    public void SpawnStoneMine()
-    {
-        SpawnMine(Resource.ResourceType.stone, stone);
+        if (sc.woodCount >= 20 && sc.ironCount >= 15)
+        {
+            SpawnMine(Resource.ResourceType.copper, copper);
+        }
     }
 
     public void SpawnGoldMine()
     {
-        SpawnMine(Resource.ResourceType.gold, gold);
+        if (sc.woodCount >= 30 && sc.ironCount >= 30 && sc.copperCount >= 30)
+        {
+            SpawnMine(Resource.ResourceType.gold, gold);
+        }
     }
 
     public void SpawnMine(Resource.ResourceType type, Material mat)
@@ -105,42 +110,54 @@ public class UIHandler : MonoBehaviour
 
     public void SpawnFarm()
     {
-        Vector3 sp = new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z + 15);
-        GameObject createdFarm = Instantiate(farm, sp, Quaternion.Euler(0, -90, 0));
-        shopanel.SetActive(false);
-        slavePanel.SetActive(false);
-        Camera.main.GetComponent<CamHandler>().isDragable = true;
+        if (sc.woodCount >= 50)
+        {
+            Vector3 sp = new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z + 15);
+            GameObject createdFarm = Instantiate(farm, sp, Quaternion.Euler(0, -90, 0));
+            shopanel.SetActive(false);
+            slavePanel.SetActive(false);
+            Camera.main.GetComponent<CamHandler>().isDragable = true;
 
-        createdFarm.transform.SetParent(GameObject.Find("Mines").transform);
+            createdFarm.transform.SetParent(GameObject.Find("Mines").transform);
+        }
     }
 
     public void SpawnLogHolder()
     {
-        Vector3 sp = new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z + 15);
-        GameObject createdStorage = Instantiate(logolder, sp, Quaternion.Euler(0, -90, 0));
-        shopanel.SetActive(false);
-        slavePanel.SetActive(false);
-        Camera.main.GetComponent<CamHandler>().isDragable = true;
+        if (sc.woodCount >= 10)
+        {
+            Vector3 sp = new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z + 15);
+            GameObject createdStorage = Instantiate(logolder, sp, Quaternion.Euler(0, -90, 0));
+            shopanel.SetActive(false);
+            slavePanel.SetActive(false);
+            Camera.main.GetComponent<CamHandler>().isDragable = true;
 
-        createdStorage.transform.SetParent(GameObject.Find("Storages").transform);
+            createdStorage.transform.SetParent(GameObject.Find("Storages").transform);
+        }
     }
 
     public void SpawnIronStorage()
     {
-        SpawnStorage(Storage.ResourceType.iron, iron);
+        if (sc.woodCount >= 10)
+        {
+            SpawnStorage(Storage.ResourceType.iron, iron);
+        }
     }
 
     public void SpawnCopperStorage()
     {
-        SpawnStorage(Storage.ResourceType.copper, copper);
+        if (sc.woodCount >= 20 && sc.ironCount >= 15)
+        { 
+            SpawnStorage(Storage.ResourceType.copper, copper); 
+        }
     }
-    public void SpawnStoneStorage()
-    {
-        SpawnStorage(Storage.ResourceType.stone, stone); 
-    }
+
     public void SpawnGoldStorage()
     {
-        SpawnStorage(Storage.ResourceType.gold, gold);
+        if (sc.woodCount >= 30 && sc.ironCount >= 30 && sc.copperCount >= 30)
+        { 
+            SpawnStorage(Storage.ResourceType.gold, gold); 
+        }
     }
 
     public void SpawnStorage(Storage.ResourceType type, Material mat)

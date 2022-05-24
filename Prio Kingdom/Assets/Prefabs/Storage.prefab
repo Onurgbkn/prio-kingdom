@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  max: 20
+  max: 100
   cur: 0
 --- !u!208 &4189016074303473242
 NavMeshObstacle:
