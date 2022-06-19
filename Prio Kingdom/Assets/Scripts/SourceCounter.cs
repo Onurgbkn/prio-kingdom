@@ -11,6 +11,13 @@ public class SourceCounter : MonoBehaviour
     public int copperCount;
     public int goldCount;
 
+    public int nextWorkerCost;
+    public int worker4Mine;
+    public int worker4Farm;
+    public int storageBoost;
+    public int treeGrowrate;
+    public int foodGrowrate;
+
     public TextMeshProUGUI foodElem;
     public TextMeshProUGUI woodElem;
     public TextMeshProUGUI ironElem;
@@ -75,5 +82,14 @@ public class SourceCounter : MonoBehaviour
     {
         goldCount -= count;
         goldElem.text = goldCount.ToString();
+    }
+
+    public void UpdateUI()
+    {
+        AddFood(0);
+        AddWood(0);
+        AddIron(0);
+        AddCopper(0);
+        AddGold(0);
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 [SelectionBase]
 public class Resource : MonoBehaviour
 {
-    public enum ResourceType { grow, wood, iron, copper, stone, gold, food };
+    public enum ResourceType { grow, wood, iron, copper, gold, food };
     public ResourceType type;
 
     public int max; // max resource capacity held

@@ -11,7 +11,6 @@ public class UIHandler : MonoBehaviour
     public Material iron;
     public Material copper;
     public Material gold;
-    public Material stone;
 
 
     public GameObject shopanel;
@@ -198,10 +197,10 @@ public class UIHandler : MonoBehaviour
     {
         string sourceType = buildObj.GetComponent<BuildHandler>().type.Split(' ')[0];
         string workType = buildObj.GetComponent<BuildHandler>().type.Split(' ')[1];
-
+        
         if (workType == "mine") buildObj.transform.parent.GetComponent<Resource>().enabled = true;
         else if (workType == "storage") buildObj.transform.parent.GetComponent<Storage>().enabled = true;
-        
+
         Destroy(buildObj.gameObject.GetComponent<MeshRenderer>());
         Destroy(buildObj);
 
@@ -296,7 +295,7 @@ public class UIHandler : MonoBehaviour
         if (slave && !slave.GetComponent<Slave>().jobs.Contains(job))
         {
             slave.GetComponent<Slave>().jobs.Add(job);
-            SlaveSelected(slave); // Not sure we need this
+            //SlaveSelected(slave); // Not sure we need this
             slave.GetComponent<Slave>().GetJob();
         }
     }

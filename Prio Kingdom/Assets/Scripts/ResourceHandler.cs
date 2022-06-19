@@ -37,7 +37,6 @@ public class ResourceHandler : MonoBehaviour
                 }
                 else
                 {
-                    ;
                     GameObject tree = Instantiate(forest, sp, Quaternion.Euler(0, Random.Range(0, 360), 0));
                     tree.transform.parent = GameObject.Find("Forest").transform;
                 }

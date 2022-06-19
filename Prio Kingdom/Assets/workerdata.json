@@ -1,0 +1,17 @@
+{
+    "workers": [
+        {
+            "wname": "gfdsf ds",
+            "jobs": [
+                "gold"
+            ]
+        },
+        {
+            "wname": "onur",
+            "jobs": [
+                "copper",
+                "wood"
+            ]
+        }
+    ]
+}
