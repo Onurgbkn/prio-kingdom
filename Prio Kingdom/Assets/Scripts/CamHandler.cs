@@ -16,11 +16,9 @@ public class CamHandler : MonoBehaviour
     public GameObject selectedSlave;
     public GameObject jobsPanel;
 
-
     // Update is called once per frame
     void Update()
     {
-
         // Drag to move camera
         if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
@@ -47,7 +45,7 @@ public class CamHandler : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                dragPos = new Vector3(Input.GetTouch(0).deltaPosition.x * camSpeed, 0, Input.GetTouch(0).deltaPosition.y * camSpeed);
+                dragPos = new Vector3(Input.GetTouch(0).deltaPosition.x * camSpeed * (transform.position.y / 20), 0, Input.GetTouch(0).deltaPosition.y * camSpeed * (transform.position.y / 20));
                 dragPos = Quaternion.Euler(0, 45, 0) * dragPos * Time.deltaTime;
 
                 bool leftmost = dragPos.x > 0 && transform.position.x - dragPos.x < -500;
@@ -80,7 +78,7 @@ public class CamHandler : MonoBehaviour
             float prevMagnitude = (touchZeroPrevPos - touchOnePrevPos).magnitude;
             float currentMagnitude = (touchZero.position - touchOne.position).magnitude;
 
-            float difference = (currentMagnitude - prevMagnitude) * 2;
+            float difference = (currentMagnitude - prevMagnitude) * 5;
 
             if ((transform.position.y >80 && difference < 0) || (transform.position.y < 15 && difference > 0))
             {

@@ -234,7 +234,7 @@ MonoBehaviour:
   max: 5
   cur: 0
   workerCount: 0
-  maxWorker: 2
+  maxWorker: 1
   progress: 0
 --- !u!208 &5716250804972893387
 NavMeshObstacle:

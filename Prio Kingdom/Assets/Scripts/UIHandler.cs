@@ -21,6 +21,7 @@ public class UIHandler : MonoBehaviour
     public GameObject slavePanel;
     public GameObject jobsPanel;
     public GameObject addJobPanel;
+    public GameObject upgradePanel;
 
     public Button buttonApr;
     public Button buttonRej;
@@ -41,11 +42,27 @@ public class UIHandler : MonoBehaviour
         shopanel.SetActive(true);
         Camera.main.GetComponent<CamHandler>().isDragable = false;
         slavePanel.SetActive(false);
+        upgradePanel.SetActive(false);
     }
 
     public void HideShopPanel()
     {
         shopanel.SetActive(false);
+        Camera.main.GetComponent<CamHandler>().isDragable = true;
+        slavePanel.SetActive(true);
+    }
+
+    public void ShowUpgradePanel()
+    {
+        upgradePanel.SetActive(true);
+        Camera.main.GetComponent<CamHandler>().isDragable = false;
+        slavePanel.SetActive(false);
+        shopanel.SetActive(false);
+    }
+
+    public void HideUpgradePanel()
+    {
+        upgradePanel.SetActive(false);
         Camera.main.GetComponent<CamHandler>().isDragable = true;
         slavePanel.SetActive(true);
     }
@@ -239,6 +256,9 @@ public class UIHandler : MonoBehaviour
     public void ShowAddJobPanel()
     {
         addJobPanel.SetActive(true);
+        slavePanel.SetActive(false);
+        shopanel.SetActive(false);
+        upgradePanel.SetActive(false);
     }
     public void HideAddJobPanel()
     {

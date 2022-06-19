@@ -48,6 +48,8 @@ public class UIKole : MonoBehaviour
             createdSlave.transform.GetChild(4).GetComponent<SkinnedMeshRenderer>().material.color = transform.GetChild(3).GetComponent<SkinnedMeshRenderer>().material.color;
             createdSlave.transform.GetChild(5).GetComponent<SkinnedMeshRenderer>().material.color = transform.GetChild(4).GetComponent<SkinnedMeshRenderer>().material.color;
 
+            ChangeColor();
+
             string tempName = wname.text;
             if (tempName == "")
             {
