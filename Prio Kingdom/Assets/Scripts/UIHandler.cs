@@ -295,7 +295,7 @@ public class UIHandler : MonoBehaviour
         if (slave && !slave.GetComponent<Slave>().jobs.Contains(job))
         {
             slave.GetComponent<Slave>().jobs.Add(job);
-            //SlaveSelected(slave); // Not sure we need this
+            SlaveSelected(slave); // Not sure we need this
             slave.GetComponent<Slave>().GetJob();
         }
     }

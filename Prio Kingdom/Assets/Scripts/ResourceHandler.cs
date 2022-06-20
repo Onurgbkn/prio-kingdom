@@ -10,9 +10,6 @@ public class ResourceHandler : MonoBehaviour
 
     public List<string> available_jobs;
 
-
-
-
     public GameObject forest;
 
     private void Start()

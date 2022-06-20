@@ -11,6 +11,8 @@ public class Storage : MonoBehaviour
     public int max;
     public int cur;
 
+    public bool isFree;
+
     ResourceHandler reshand;
     SourceCounter sc;
     private void Start()
@@ -22,31 +24,34 @@ public class Storage : MonoBehaviour
         reshand.GetJob4Slave();
         if (type != ResourceType.food) GetComponent<BoxCollider>().enabled = true;
 
-        if (type.ToString() == "iron")
+        if (!isFree)
         {
-            reshand.GetSource("wood", 10);
-            sc.GetWood(10);
-        }
-        else if (type.ToString() == "copper")
-        {
-            reshand.GetSource("wood", 20);
-            reshand.GetSource("iron", 15);
-            sc.GetWood(20);
-            sc.GetIron(15);
-        }
-        else if (type.ToString() == "gold")
-        {
-            reshand.GetSource("wood", 30);
-            reshand.GetSource("iron", 30);
-            reshand.GetSource("copper", 30);
-            sc.GetWood(30);
-            sc.GetIron(30);
-            sc.GetCopper(30);
-        }
-        else if (type.ToString() == "wood")
-        {
-            reshand.GetSource("wood", 10);
-            sc.GetWood(10);
+            if (type.ToString() == "iron")
+            {
+                reshand.GetSource("wood", 10);
+                sc.GetWood(10);
+            }
+            else if (type.ToString() == "copper")
+            {
+                reshand.GetSource("wood", 20);
+                reshand.GetSource("iron", 15);
+                sc.GetWood(20);
+                sc.GetIron(15);
+            }
+            else if (type.ToString() == "gold")
+            {
+                reshand.GetSource("wood", 30);
+                reshand.GetSource("iron", 30);
+                reshand.GetSource("copper", 30);
+                sc.GetWood(30);
+                sc.GetIron(30);
+                sc.GetCopper(30);
+            }
+            else if (type.ToString() == "wood")
+            {
+                reshand.GetSource("wood", 10);
+                sc.GetWood(10);
+            }
         }
     }
 

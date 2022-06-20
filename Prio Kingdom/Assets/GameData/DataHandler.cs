@@ -26,6 +26,10 @@ public class DataHandler : MonoBehaviour
 
     private void Start()
     {
+        if (!Directory.Exists(Application.dataPath + "/save"))
+        {
+            Directory.CreateDirectory(Application.dataPath + "/save");
+        }
         LoadGame();
     }
 
@@ -39,6 +43,7 @@ public class DataHandler : MonoBehaviour
         SaveGameData();
         SaveWorkerData();
         SaveResourceData();
+        SaveStorageData();
     }
 
     public void LoadGame()
@@ -46,6 +51,7 @@ public class DataHandler : MonoBehaviour
         LoadGameData();
         LoadWorkerData();
         LoadResourceData();
+        LoadStorageData();
     }
 
     private void OnApplicationQuit()
@@ -70,14 +76,14 @@ public class DataHandler : MonoBehaviour
         gameData.foodGrowrate = sc.foodGrowrate;
 
         string json = JsonUtility.ToJson(gameData, true);
-        File.WriteAllText(Application.dataPath + "/gamedata.json", json);
+        File.WriteAllText(Application.dataPath + "/save/gamedata.json", json);
     }
 
     void LoadGameData()
     {
         try
         {
-            string json = File.ReadAllText(Application.dataPath + "/gamedata.json");
+            string json = File.ReadAllText(Application.dataPath + "/save/gamedata.json");
             GameData data = JsonUtility.FromJson<GameData>(json);
             sc.foodCount = data.food;
             sc.woodCount = data.wood;
@@ -113,14 +119,14 @@ public class DataHandler : MonoBehaviour
         }
    
         string json = JsonUtility.ToJson(workers, true);
-        File.WriteAllText(Application.dataPath + "/workerdata.json", json);
+        File.WriteAllText(Application.dataPath + "/save/workerdata.json", json);
     }
 
     void LoadWorkerData()
     {
         try
         {
-            string json = File.ReadAllText(Application.dataPath + "/workerdata.json");
+            string json = File.ReadAllText(Application.dataPath + "/save/workerdata.json");
             WorkersData workersData = JsonUtility.FromJson<WorkersData>(json);
             foreach (WorkerData workerData in workersData.workers)
             {
@@ -157,14 +163,14 @@ public class DataHandler : MonoBehaviour
         }
 
         string json = JsonUtility.ToJson(resources, true);
-        File.WriteAllText(Application.dataPath + "/resourcesdata.json", json);
+        File.WriteAllText(Application.dataPath + "/save/resourcesdata.json", json);
     }
 
     void LoadResourceData()
     {
         try
         {
-            string json = File.ReadAllText(Application.dataPath + "/resourcesdata.json");
+            string json = File.ReadAllText(Application.dataPath + "/save/resourcesdata.json");
             ResourcesData resourcesData = JsonUtility.FromJson<ResourcesData>(json);
             foreach (ResourceData rd in resourcesData.resources)
             {
@@ -177,6 +183,7 @@ public class DataHandler : MonoBehaviour
                     createdSource.transform.Find("Ore").GetComponent<MeshRenderer>().material = iron;
                     createdSource.transform.SetParent(GameObject.Find("Mines").transform);
 
+                    createdSource.GetComponent<Resource>().isFree = true;
                     createdSource.GetComponent<Resource>().enabled = true;
 
                     BuildHandler buildObj = createdSource.transform.Find("BuiltBox").GetComponent<BuildHandler>();
@@ -190,7 +197,7 @@ public class DataHandler : MonoBehaviour
                     createdSource.GetComponent<Resource>().type = Resource.ResourceType.copper;
                     createdSource.transform.Find("Ore").GetComponent<MeshRenderer>().material = copper;
                     createdSource.transform.SetParent(GameObject.Find("Mines").transform);
-
+                    createdSource.GetComponent<Resource>().isFree = true;
                     createdSource.GetComponent<Resource>().enabled = true;
 
                     BuildHandler buildObj = createdSource.transform.Find("BuiltBox").GetComponent<BuildHandler>();
@@ -204,7 +211,7 @@ public class DataHandler : MonoBehaviour
                     createdSource.GetComponent<Resource>().type = Resource.ResourceType.gold;
                     createdSource.transform.Find("Ore").GetComponent<MeshRenderer>().material = gold;
                     createdSource.transform.SetParent(GameObject.Find("Mines").transform);
-
+                    createdSource.GetComponent<Resource>().isFree = true;
                     createdSource.GetComponent<Resource>().enabled = true;
 
                     BuildHandler buildObj = createdSource.transform.Find("BuiltBox").GetComponent<BuildHandler>();
@@ -217,8 +224,101 @@ public class DataHandler : MonoBehaviour
                     createdSource.GetComponent<Resource>().cur = rd.cur;
                     createdSource.GetComponent<Resource>().type = Resource.ResourceType.grow;
                     createdSource.transform.SetParent(GameObject.Find("Mines").transform);
-
+                    createdSource.GetComponent<Resource>().isFree = true;
                     createdSource.GetComponent<Resource>().enabled = true;
+
+                    BuildHandler buildObj = createdSource.transform.Find("BuiltBox").GetComponent<BuildHandler>();
+                    Destroy(buildObj.gameObject.GetComponent<MeshRenderer>());
+                    Destroy(buildObj);
+                }
+            }
+        }
+        catch (System.Exception) { }
+    }
+
+    void SaveStorageData()
+    {
+        StoragesData storages = new StoragesData();
+        foreach (Storage storage in rh.storages)
+        {
+            StorageData storageData = new StorageData();
+            storageData.cur = storage.cur;
+            storageData.type = storage.type.ToString();
+            storageData.position = storage.transform.position;
+            storages.storages.Add(storageData);
+        }
+
+        string json = JsonUtility.ToJson(storages, true);
+        File.WriteAllText(Application.dataPath + "/save/storagesdata.json", json);
+    }
+
+    void LoadStorageData()
+    {
+        try
+        {
+            string json = File.ReadAllText(Application.dataPath + "/save/storagesdata.json");
+            StoragesData storagesData = JsonUtility.FromJson<StoragesData>(json);
+            foreach (StorageData rd in storagesData.storages)
+            {
+                Vector3 sp = new Vector3(rd.position.x, 0, rd.position.z);
+                if (rd.type.ToString() == "iron")
+                {
+                    GameObject createdSource = Instantiate(storage, sp, Quaternion.Euler(0, -90, 0));
+                    createdSource.GetComponent<Storage>().type = Storage.ResourceType.iron;
+                    createdSource.transform.Find("Ore 1").GetComponent<MeshRenderer>().material = iron;
+                    createdSource.transform.Find("Ore 2").GetComponent<MeshRenderer>().material = iron;
+                    createdSource.transform.Find("Ore 3").GetComponent<MeshRenderer>().material = iron;
+                    createdSource.transform.Find("Woody").GetComponent<MeshRenderer>().material = iron;
+                    createdSource.transform.SetParent(GameObject.Find("Storages").transform);
+                    createdSource.GetComponent<Storage>().isFree = true;
+                    createdSource.GetComponent<Storage>().enabled = true;
+
+                    BuildHandler buildObj = createdSource.transform.Find("BuiltBox").GetComponent<BuildHandler>();
+                    Destroy(buildObj.gameObject.GetComponent<MeshRenderer>());
+                    Destroy(buildObj);
+                }
+                else if (rd.type.ToString() == "copper")
+                {
+                    GameObject createdSource = Instantiate(storage, sp, Quaternion.Euler(0, -90, 0));
+                    createdSource.GetComponent<Storage>().cur = rd.cur;
+                    createdSource.GetComponent<Storage>().type = Storage.ResourceType.copper;
+                    createdSource.transform.Find("Ore 1").GetComponent<MeshRenderer>().material = copper;
+                    createdSource.transform.Find("Ore 2").GetComponent<MeshRenderer>().material = copper;
+                    createdSource.transform.Find("Ore 3").GetComponent<MeshRenderer>().material = copper;
+                    createdSource.transform.Find("Woody").GetComponent<MeshRenderer>().material = copper;
+                    createdSource.transform.SetParent(GameObject.Find("Storages").transform);
+                    createdSource.GetComponent<Storage>().isFree = true;
+                    createdSource.GetComponent<Storage>().enabled = true;
+
+                    BuildHandler buildObj = createdSource.transform.Find("BuiltBox").GetComponent<BuildHandler>();
+                    Destroy(buildObj.gameObject.GetComponent<MeshRenderer>());
+                    Destroy(buildObj);
+                }
+                else if (rd.type.ToString() == "gold")
+                {
+                    GameObject createdSource = Instantiate(storage, sp, Quaternion.Euler(0, -90, 0));
+                    createdSource.GetComponent<Storage>().cur = rd.cur;
+                    createdSource.GetComponent<Storage>().type = Storage.ResourceType.gold;
+                    createdSource.transform.Find("Ore 1").GetComponent<MeshRenderer>().material = gold;
+                    createdSource.transform.Find("Ore 2").GetComponent<MeshRenderer>().material = gold;
+                    createdSource.transform.Find("Ore 3").GetComponent<MeshRenderer>().material = gold;
+                    createdSource.transform.Find("Woody").GetComponent<MeshRenderer>().material = gold;
+                    createdSource.transform.SetParent(GameObject.Find("Storages").transform);
+                    createdSource.GetComponent<Storage>().isFree = true;
+                    createdSource.GetComponent<Storage>().enabled = true;
+
+                    BuildHandler buildObj = createdSource.transform.Find("BuiltBox").GetComponent<BuildHandler>();
+                    Destroy(buildObj.gameObject.GetComponent<MeshRenderer>());
+                    Destroy(buildObj);
+                }
+                else if (rd.type.ToString() == "wood")
+                {
+                    GameObject createdSource = Instantiate(logHolder, sp, Quaternion.Euler(0, -90, 0));
+                    createdSource.GetComponent<Storage>().cur = rd.cur;
+                    createdSource.GetComponent<Storage>().type = Storage.ResourceType.wood;
+                    createdSource.transform.SetParent(GameObject.Find("Storages").transform);
+                    createdSource.GetComponent<Storage>().isFree = true;
+                    createdSource.GetComponent<Storage>().enabled = true;
 
                     BuildHandler buildObj = createdSource.transform.Find("BuiltBox").GetComponent<BuildHandler>();
                     Destroy(buildObj.gameObject.GetComponent<MeshRenderer>());

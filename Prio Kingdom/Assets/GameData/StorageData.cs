@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 [System.Serializable]
-public class ResourceData
+public class StorageData
 {
     public int cur;
     public string type;
@@ -13,7 +13,7 @@ public class ResourceData
 
 
 [System.Serializable]
-public class ResourcesData
+public class StoragesData
 {
-    public List<ResourceData> resources = new List<ResourceData>();
+    public List<StorageData> storages = new List<StorageData>();
 }

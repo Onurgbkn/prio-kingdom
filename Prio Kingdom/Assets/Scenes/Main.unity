@@ -390,7 +390,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +1 Worker for mines
+  m_text: food grow %10 faster
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 84ed0bb67e707224ba8398c0a6e4dee9, type: 2}
   m_sharedMaterial: {fileID: 6170582085088658686, guid: 84ed0bb67e707224ba8398c0a6e4dee9, type: 2}
@@ -1479,7 +1479,6 @@ MonoBehaviour:
   iron: {fileID: 2100000, guid: 7b0af683f5e57684abbb42f23671ed6f, type: 2}
   copper: {fileID: 2100000, guid: 3dec245e60f094247a70bdcee331ec73, type: 2}
   gold: {fileID: 2100000, guid: f7621208e2f477d4ea731e69635266ea, type: 2}
-  stone: {fileID: 2100000, guid: 52c18ae5e7d74ba43a9a6b0186a7a9c3, type: 2}
   shopanel: {fileID: 1746207214}
   minePanel: {fileID: 890388609}
   storagePanel: {fileID: 1311243063}
@@ -2971,7 +2970,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &391140559
 GameObject:
@@ -3135,7 +3134,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &402443443
 GameObject:
@@ -8902,7 +8901,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &978467322
 GameObject:
@@ -9245,6 +9244,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1018935012}
   m_CullTransparentMesh: 1
+--- !u!1 &1027238266
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1027238268}
+  - component: {fileID: 1027238267}
+  m_Layer: 0
+  m_Name: SaveHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1027238267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027238266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7699a78993ab5004fae6330b5919e13f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sc: {fileID: 2046515261}
+  rh: {fileID: 1746157295}
+  slave: {fileID: 7711204632247164615, guid: e6bd286e64b0d514ea4654e38b00d4c2, type: 3}
+  mine: {fileID: 4419514371275327996, guid: 8e510e59104108b41b7def48483039ea, type: 3}
+  storage: {fileID: 1825723079407650518, guid: 541cf2d8206628949bc962266d1fbb3e, type: 3}
+  farm: {fileID: 933967706926636331, guid: 8a28a004a5cbda9478fa0f29ac9ee4f9, type: 3}
+  logHolder: {fileID: 5787792971558655975, guid: f0560ee0e25158f4392ff438781a5722, type: 3}
+  workerIcon: {fileID: 8938832845644896957, guid: 3b993620944f20145aaa64102df6399a, type: 3}
+  workerPanel: {fileID: 1418702823}
+  uihand: {fileID: 208225917}
+  iron: {fileID: 2100000, guid: 7b0af683f5e57684abbb42f23671ed6f, type: 2}
+  copper: {fileID: 2100000, guid: 3dec245e60f094247a70bdcee331ec73, type: 2}
+  gold: {fileID: 2100000, guid: f7621208e2f477d4ea731e69635266ea, type: 2}
+--- !u!4 &1027238268
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027238266}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -16.87529, y: 36.31668, z: -17.671284}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1028721582
 GameObject:
   m_ObjectHideFlags: 0
@@ -9621,7 +9676,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1084857864
 GameObject:
@@ -12672,7 +12727,7 @@ Transform:
   m_LocalScale: {x: 250, y: 1, z: 250}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!54 &1508593785
 Rigidbody:
@@ -14007,7 +14062,7 @@ Transform:
   m_LocalScale: {x: 1500, y: 1, z: 1500}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1625963089
 Rigidbody:
@@ -14792,7 +14847,7 @@ Transform:
   m_Children:
   - {fileID: 208225916}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1746157295
 MonoBehaviour:
@@ -17327,6 +17382,12 @@ MonoBehaviour:
   ironCount: 0
   copperCount: 0
   goldCount: 0
+  nextWorkerCost: 0
+  worker4Mine: 0
+  worker4Farm: 0
+  storageBoost: 0
+  treeGrowrate: 0
+  foodGrowrate: 0
   foodElem: {fileID: 998056738}
   woodElem: {fileID: 505997653}
   ironElem: {fileID: 284445327}
