@@ -113,7 +113,8 @@ public class UIHandler : MonoBehaviour
 
     public void SpawnMine(Resource.ResourceType type, Material mat)
     {
-        Vector3 sp = new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z + 15);
+        float t = (Camera.main.transform.position.y - 1.55f) / 1.4f; // for the zoom
+        Vector3 sp = new Vector3(Camera.main.transform.position.x + t, 0, Camera.main.transform.position.z + t);
         GameObject createdMine = Instantiate(mine, sp, Quaternion.Euler(0, -90, 0));
         createdMine.transform.Find("Ore").GetComponent<MeshRenderer>().material = mat;
         createdMine.GetComponent<Resource>().type = type;
@@ -128,7 +129,8 @@ public class UIHandler : MonoBehaviour
     {
         if (sc.woodCount >= 50)
         {
-            Vector3 sp = new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z + 15);
+            float t = (Camera.main.transform.position.y - 1.55f) / 1.4f; // for the zoom
+            Vector3 sp = new Vector3(Camera.main.transform.position.x + t, 0, Camera.main.transform.position.z + t);
             GameObject createdFarm = Instantiate(farm, sp, Quaternion.Euler(0, -90, 0));
             shopanel.SetActive(false);
             slavePanel.SetActive(false);
@@ -142,7 +144,8 @@ public class UIHandler : MonoBehaviour
     {
         if (sc.woodCount >= 10)
         {
-            Vector3 sp = new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z + 15);
+            float t = (Camera.main.transform.position.y - 1.55f) / 1.4f; // for the zoom
+            Vector3 sp = new Vector3(Camera.main.transform.position.x + t, 0, Camera.main.transform.position.z + t);
             GameObject createdStorage = Instantiate(logolder, sp, Quaternion.Euler(0, -90, 0));
             shopanel.SetActive(false);
             slavePanel.SetActive(false);
@@ -178,7 +181,8 @@ public class UIHandler : MonoBehaviour
 
     public void SpawnStorage(Storage.ResourceType type, Material mat)
     {
-        Vector3 sp = new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z + 15);
+        float t = (Camera.main.transform.position.y - 1.55f) / 1.4f; // for the zoom
+        Vector3 sp = new Vector3(Camera.main.transform.position.x + t, 0, Camera.main.transform.position.z + t);
         GameObject createdStorage = Instantiate(storage, sp, Quaternion.Euler(0, -90, 0));
         createdStorage.transform.Find("Ore 1").GetComponent<MeshRenderer>().material = mat;
         createdStorage.transform.Find("Ore 2").GetComponent<MeshRenderer>().material = mat;

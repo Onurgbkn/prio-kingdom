@@ -35,7 +35,6 @@ public class DataHandler : MonoBehaviour
 
     public void NewGame()
     {
-        
     }
 
     public void SaveGame()
@@ -56,8 +55,17 @@ public class DataHandler : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        SaveGame();   
+        SaveGame(); 
     }
+
+    private void OnApplicationPause(bool pause)
+    {
+        if (pause)
+        {
+            SaveGame();
+        }
+    }
+
 
     void SaveGameData()
     {

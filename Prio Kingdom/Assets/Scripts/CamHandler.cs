@@ -91,7 +91,8 @@ public class CamHandler : MonoBehaviour
         // Follow slave
         if (selectedSlave != null)
         {
-            transform.position = new Vector3(selectedSlave.transform.position.x -10, transform.position.y, selectedSlave.transform.position.z -10);
+            float t = (Camera.main.transform.position.y - 1.55f) / 1.4f; // for the zoom
+            transform.position = new Vector3(selectedSlave.transform.position.x - t, transform.position.y, selectedSlave.transform.position.z - t);
         }
     }
 }
