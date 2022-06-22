@@ -9,7 +9,7 @@ public class CamHandler : MonoBehaviour
 
     private bool onDrag;
 
-    private float camSpeed = 2.5f;
+    private float camSpeed = 2f;
 
     public bool isDragable;
 
@@ -78,7 +78,7 @@ public class CamHandler : MonoBehaviour
             float prevMagnitude = (touchZeroPrevPos - touchOnePrevPos).magnitude;
             float currentMagnitude = (touchZero.position - touchOne.position).magnitude;
 
-            float difference = (currentMagnitude - prevMagnitude) * 5;
+            float difference = (currentMagnitude - prevMagnitude) * 4;
 
             if ((transform.position.y >80 && difference < 0) || (transform.position.y < 15 && difference > 0))
             {

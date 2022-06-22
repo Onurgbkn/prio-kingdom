@@ -26,9 +26,9 @@ public class DataHandler : MonoBehaviour
 
     private void Start()
     {
-        if (!Directory.Exists(Application.dataPath + "/save"))
+        if (!Directory.Exists(Application.persistentDataPath + "/save"))
         {
-            Directory.CreateDirectory(Application.dataPath + "/save");
+            Directory.CreateDirectory(Application.persistentDataPath + "/save");
         }
         LoadGame();
     }
@@ -76,14 +76,14 @@ public class DataHandler : MonoBehaviour
         gameData.foodGrowrate = sc.foodGrowrate;
 
         string json = JsonUtility.ToJson(gameData, true);
-        File.WriteAllText(Application.dataPath + "/save/gamedata.json", json);
+        File.WriteAllText(Application.persistentDataPath + "/save/gamedata.json", json);
     }
 
     void LoadGameData()
     {
         try
         {
-            string json = File.ReadAllText(Application.dataPath + "/save/gamedata.json");
+            string json = File.ReadAllText(Application.persistentDataPath + "/save/gamedata.json");
             GameData data = JsonUtility.FromJson<GameData>(json);
             sc.foodCount = data.food;
             sc.woodCount = data.wood;
@@ -119,14 +119,14 @@ public class DataHandler : MonoBehaviour
         }
    
         string json = JsonUtility.ToJson(workers, true);
-        File.WriteAllText(Application.dataPath + "/save/workerdata.json", json);
+        File.WriteAllText(Application.persistentDataPath + "/save/workerdata.json", json);
     }
 
     void LoadWorkerData()
     {
         try
         {
-            string json = File.ReadAllText(Application.dataPath + "/save/workerdata.json");
+            string json = File.ReadAllText(Application.persistentDataPath + "/save/workerdata.json");
             WorkersData workersData = JsonUtility.FromJson<WorkersData>(json);
             foreach (WorkerData workerData in workersData.workers)
             {
@@ -163,14 +163,14 @@ public class DataHandler : MonoBehaviour
         }
 
         string json = JsonUtility.ToJson(resources, true);
-        File.WriteAllText(Application.dataPath + "/save/resourcesdata.json", json);
+        File.WriteAllText(Application.persistentDataPath + "/save/resourcesdata.json", json);
     }
 
     void LoadResourceData()
     {
         try
         {
-            string json = File.ReadAllText(Application.dataPath + "/save/resourcesdata.json");
+            string json = File.ReadAllText(Application.persistentDataPath + "/save/resourcesdata.json");
             ResourcesData resourcesData = JsonUtility.FromJson<ResourcesData>(json);
             foreach (ResourceData rd in resourcesData.resources)
             {
@@ -249,14 +249,14 @@ public class DataHandler : MonoBehaviour
         }
 
         string json = JsonUtility.ToJson(storages, true);
-        File.WriteAllText(Application.dataPath + "/save/storagesdata.json", json);
+        File.WriteAllText(Application.persistentDataPath + "/save/storagesdata.json", json);
     }
 
     void LoadStorageData()
     {
         try
         {
-            string json = File.ReadAllText(Application.dataPath + "/save/storagesdata.json");
+            string json = File.ReadAllText(Application.persistentDataPath + "/save/storagesdata.json");
             StoragesData storagesData = JsonUtility.FromJson<StoragesData>(json);
             foreach (StorageData rd in storagesData.storages)
             {
