@@ -7,10 +7,12 @@ public class PlumpkinGrow : MonoBehaviour
     int growRate;
     Resource res;
     ResourceHandler reshand;
+    SourceCounter sc;
     private void Start()
     {
         res = GetComponent<Resource>();
         reshand = GameObject.Find("GameHandler").GetComponent<ResourceHandler>();
+        sc = Camera.main.GetComponent<SourceCounter>();
         Begin2Grow();
     }
 
@@ -18,7 +20,7 @@ public class PlumpkinGrow : MonoBehaviour
     {
         for (growRate = 1; growRate < 4; growRate++)
         {
-            yield return new WaitForSeconds(20f);
+            yield return new WaitForSeconds(20f * Mathf.Pow(0.9f, sc.foodGrowrate));
             Grow(growRate);
         }
         res.type = Resource.ResourceType.food;

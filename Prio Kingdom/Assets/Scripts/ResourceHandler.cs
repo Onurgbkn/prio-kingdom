@@ -12,6 +12,8 @@ public class ResourceHandler : MonoBehaviour
 
     public GameObject forest;
 
+    public SourceCounter sc;
+
     private void Start()
     {
         StartCoroutine(SpawnTrees());
@@ -38,7 +40,7 @@ public class ResourceHandler : MonoBehaviour
                     tree.transform.parent = GameObject.Find("Forest").transform;
                 }
             }
-            yield return new WaitForSeconds(15f);
+            yield return new WaitForSeconds(30f * Mathf.Pow(0.9f, sc.treeGrowrate));
         }
     }
 
@@ -130,5 +132,39 @@ public class ResourceHandler : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void Worker4Mine()
+    {
+        foreach (Resource s in resources)
+        {
+            if (s.type.ToString() == "iron" || s.type.ToString() == "copper" || s.type.ToString() == "gold")
+            {
+                s.maxWorker += 1;
+            }
+        }
+        GetJob4Slave();
+    }
+
+    public void Worker4Farm()
+    {
+        foreach (Resource s in resources)
+        {
+            if (s.type.ToString() == "food" || s.type.ToString() == "grow")
+            {
+                s.maxWorker += 1;
+            }
+        }
+        GetJob4Slave();
+    }
+
+    public void Cap4Storage()
+    {
+        foreach (Storage s in storages)
+        {
+            s.max += 50;
+        }
+        UpdateJobs();
+        GetJob4Slave();
     }
 }

@@ -118,6 +118,7 @@ public class UIHandler : MonoBehaviour
         GameObject createdMine = Instantiate(mine, sp, Quaternion.Euler(0, -90, 0));
         createdMine.transform.Find("Ore").GetComponent<MeshRenderer>().material = mat;
         createdMine.GetComponent<Resource>().type = type;
+        createdMine.GetComponent<Resource>().maxWorker = sc.worker4Mine + 1;
         shopanel.SetActive(false);
         slavePanel.SetActive(false);
         Camera.main.GetComponent<CamHandler>().isDragable = true;
@@ -132,6 +133,7 @@ public class UIHandler : MonoBehaviour
             float t = (Camera.main.transform.position.y - 1.55f) / 1.4f; // for the zoom
             Vector3 sp = new Vector3(Camera.main.transform.position.x + t, 0, Camera.main.transform.position.z + t);
             GameObject createdFarm = Instantiate(farm, sp, Quaternion.Euler(0, -90, 0));
+            createdFarm.GetComponent<Resource>().maxWorker = sc.worker4Farm + 1;
             shopanel.SetActive(false);
             slavePanel.SetActive(false);
             Camera.main.GetComponent<CamHandler>().isDragable = true;
@@ -147,6 +149,8 @@ public class UIHandler : MonoBehaviour
             float t = (Camera.main.transform.position.y - 1.55f) / 1.4f; // for the zoom
             Vector3 sp = new Vector3(Camera.main.transform.position.x + t, 0, Camera.main.transform.position.z + t);
             GameObject createdStorage = Instantiate(logolder, sp, Quaternion.Euler(0, -90, 0));
+            createdStorage.GetComponent<Storage>().max = 50 * sc.storageBoost + 100;
+
             shopanel.SetActive(false);
             slavePanel.SetActive(false);
             Camera.main.GetComponent<CamHandler>().isDragable = true;
@@ -189,6 +193,7 @@ public class UIHandler : MonoBehaviour
         createdStorage.transform.Find("Ore 3").GetComponent<MeshRenderer>().material = mat;
         createdStorage.transform.Find("Woody").GetComponent<MeshRenderer>().material = mat;
         createdStorage.GetComponent<Storage>().type = type;
+        createdStorage.GetComponent<Storage>().max = 50 * sc.storageBoost + 100;
         shopanel.SetActive(false);
         slavePanel.SetActive(false);
         Camera.main.GetComponent<CamHandler>().isDragable = true;

@@ -1605,8 +1605,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 115, y: -275}
-  m_SizeDelta: {x: 210, y: 100}
+  m_AnchoredPosition: {x: 117.5, y: -280}
+  m_SizeDelta: {x: 215, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &260850638
 MonoBehaviour:
@@ -1652,9 +1652,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 208225917}
-        m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
-        m_MethodName: JobFarming
+      - m_Target: {fileID: 1877952091}
+        m_TargetAssemblyTypeName: UIUpdate, Assembly-CSharp
+        m_MethodName: TreeGrowFaster
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2010,8 +2010,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -29.51}
-  m_SizeDelta: {x: 500, y: 334.02}
+  m_AnchoredPosition: {x: 0, y: -33.16}
+  m_SizeDelta: {x: 500, y: 341.32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &299991451
 MonoBehaviour:
@@ -2042,12 +2042,12 @@ MonoBehaviour:
   m_Padding:
     m_Left: 10
     m_Right: 10
-    m_Top: 5
+    m_Top: 10
     m_Bottom: 10
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 210, y: 100}
+  m_CellSize: {x: 215, y: 100}
   m_Spacing: {x: 10, y: 10}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -4292,8 +4292,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 115, y: -165}
-  m_SizeDelta: {x: 210, y: 100}
+  m_AnchoredPosition: {x: 117.5, y: -170}
+  m_SizeDelta: {x: 215, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &503796172
 MonoBehaviour:
@@ -4339,9 +4339,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 208225917}
-        m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
-        m_MethodName: JobFarming
+      - m_Target: {fileID: 1877952091}
+        m_TargetAssemblyTypeName: UIUpdate, Assembly-CSharp
+        m_MethodName: Worker4Farm
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8418,7 +8418,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: -90}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &958553911
 MonoBehaviour:
@@ -9275,6 +9275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sc: {fileID: 2046515261}
   rh: {fileID: 1746157295}
+  updateU: {fileID: 1877952091}
   slave: {fileID: 7711204632247164615, guid: e6bd286e64b0d514ea4654e38b00d4c2, type: 3}
   mine: {fileID: 4419514371275327996, guid: 8e510e59104108b41b7def48483039ea, type: 3}
   storage: {fileID: 1825723079407650518, guid: 541cf2d8206628949bc962266d1fbb3e, type: 3}
@@ -10870,10 +10871,10 @@ RectTransform:
   m_Father: {fileID: 432020357}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -639.44, y: -319.49}
-  m_SizeDelta: {x: 75, y: 40}
+  m_AnchorMin: {x: 0.07067877, y: 0}
+  m_AnchorMax: {x: 0.16867876, y: 0.10829691}
+  m_AnchoredPosition: {x: 0.7662964, y: 0}
+  m_SizeDelta: {x: 1, y: 0}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1189659141
 MonoBehaviour:
@@ -11331,8 +11332,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 335, y: -55}
-  m_SizeDelta: {x: 210, y: 100}
+  m_AnchoredPosition: {x: 342.5, y: -60}
+  m_SizeDelta: {x: 215, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1265577433
 MonoBehaviour:
@@ -11378,9 +11379,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 208225917}
-        m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
-        m_MethodName: JobFarming
+      - m_Target: {fileID: 1877952091}
+        m_TargetAssemblyTypeName: UIUpdate, Assembly-CSharp
+        m_MethodName: Cap4Storage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11465,8 +11466,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 335, y: -275}
-  m_SizeDelta: {x: 210, y: 100}
+  m_AnchoredPosition: {x: 342.5, y: -280}
+  m_SizeDelta: {x: 215, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1280830090
 MonoBehaviour:
@@ -12307,7 +12308,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1418702824
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14866,6 +14867,7 @@ MonoBehaviour:
   slaves: []
   available_jobs: []
   forest: {fileID: 5054841182673807763, guid: 591cc43323e67e54a883415625c3fca7, type: 3}
+  sc: {fileID: 2046515261}
 --- !u!114 &1746157296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16174,6 +16176,7 @@ GameObject:
   - component: {fileID: 1877952087}
   - component: {fileID: 1877952090}
   - component: {fileID: 1877952089}
+  - component: {fileID: 1877952091}
   m_Layer: 5
   m_Name: Upgrade Panel
   m_TagString: Untagged
@@ -16283,6 +16286,25 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1877952091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1877952085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4b04499cece9ec41af51a7c2cec6e40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sc: {fileID: 2046515261}
+  rh: {fileID: 1746157295}
+  worker4Mine: {fileID: 1061477595}
+  worker4Farm: {fileID: 457942588}
+  cap4Storage: {fileID: 1551398519}
+  foodGrowFaster: {fileID: 1651534634}
+  treeGrowFaster: {fileID: 1844072400}
 --- !u!1 &1894810142
 GameObject:
   m_ObjectHideFlags: 0
@@ -17565,8 +17587,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 335, y: -165}
-  m_SizeDelta: {x: 210, y: 100}
+  m_AnchoredPosition: {x: 342.5, y: -170}
+  m_SizeDelta: {x: 215, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2051826443
 MonoBehaviour:
@@ -17612,9 +17634,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 208225917}
-        m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
-        m_MethodName: JobFarming
+      - m_Target: {fileID: 1877952091}
+        m_TargetAssemblyTypeName: UIUpdate, Assembly-CSharp
+        m_MethodName: FoodGrowFaster
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17833,8 +17855,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 115, y: -55}
-  m_SizeDelta: {x: 210, y: 100}
+  m_AnchoredPosition: {x: 117.5, y: -60}
+  m_SizeDelta: {x: 215, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2069100472
 MonoBehaviour:
@@ -17880,9 +17902,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 208225917}
-        m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
-        m_MethodName: JobFarming
+      - m_Target: {fileID: 1877952091}
+        m_TargetAssemblyTypeName: UIUpdate, Assembly-CSharp
+        m_MethodName: Worker4Mine
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

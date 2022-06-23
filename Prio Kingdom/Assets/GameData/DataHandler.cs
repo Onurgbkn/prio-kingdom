@@ -9,6 +9,7 @@ public class DataHandler : MonoBehaviour
 {
     public SourceCounter sc;
     public ResourceHandler rh;
+    public UIUpdate updateU;
 
     public GameObject slave;
     public GameObject mine;
@@ -107,6 +108,7 @@ public class DataHandler : MonoBehaviour
             sc.foodGrowrate = data.foodGrowrate;
 
             sc.UpdateUI();
+            updateU.UpdateReqUI();
         }
         catch (System.Exception)
         {
@@ -187,6 +189,7 @@ public class DataHandler : MonoBehaviour
                 {
                     GameObject createdSource = Instantiate(mine, sp, Quaternion.Euler(0, -90, 0));
                     createdSource.GetComponent<Resource>().cur = rd.cur;
+                    createdSource.GetComponent<Resource>().maxWorker = sc.worker4Mine + 1;
                     createdSource.GetComponent<Resource>().type = Resource.ResourceType.iron;
                     createdSource.transform.Find("Ore").GetComponent<MeshRenderer>().material = iron;
                     createdSource.transform.SetParent(GameObject.Find("Mines").transform);
@@ -202,6 +205,7 @@ public class DataHandler : MonoBehaviour
                 {
                     GameObject createdSource = Instantiate(mine, sp, Quaternion.Euler(0, -90, 0));
                     createdSource.GetComponent<Resource>().cur = rd.cur;
+                    createdSource.GetComponent<Resource>().maxWorker = sc.worker4Mine + 1;
                     createdSource.GetComponent<Resource>().type = Resource.ResourceType.copper;
                     createdSource.transform.Find("Ore").GetComponent<MeshRenderer>().material = copper;
                     createdSource.transform.SetParent(GameObject.Find("Mines").transform);
@@ -216,6 +220,7 @@ public class DataHandler : MonoBehaviour
                 {
                     GameObject createdSource = Instantiate(mine, sp, Quaternion.Euler(0, -90, 0));
                     createdSource.GetComponent<Resource>().cur = rd.cur;
+                    createdSource.GetComponent<Resource>().maxWorker = sc.worker4Mine + 1;
                     createdSource.GetComponent<Resource>().type = Resource.ResourceType.gold;
                     createdSource.transform.Find("Ore").GetComponent<MeshRenderer>().material = gold;
                     createdSource.transform.SetParent(GameObject.Find("Mines").transform);
@@ -230,6 +235,7 @@ public class DataHandler : MonoBehaviour
                 {
                     GameObject createdSource = Instantiate(farm, sp, Quaternion.Euler(0, -90, 0));
                     createdSource.GetComponent<Resource>().cur = rd.cur;
+                    createdSource.GetComponent<Resource>().maxWorker = sc.worker4Mine + 1;
                     createdSource.GetComponent<Resource>().type = Resource.ResourceType.grow;
                     createdSource.transform.SetParent(GameObject.Find("Mines").transform);
                     createdSource.GetComponent<Resource>().isFree = true;
@@ -273,6 +279,7 @@ public class DataHandler : MonoBehaviour
                 {
                     GameObject createdSource = Instantiate(storage, sp, Quaternion.Euler(0, -90, 0));
                     createdSource.GetComponent<Storage>().type = Storage.ResourceType.iron;
+                    createdSource.GetComponent<Storage>().max = 50 * sc.storageBoost + 100;
                     createdSource.transform.Find("Ore 1").GetComponent<MeshRenderer>().material = iron;
                     createdSource.transform.Find("Ore 2").GetComponent<MeshRenderer>().material = iron;
                     createdSource.transform.Find("Ore 3").GetComponent<MeshRenderer>().material = iron;
@@ -290,6 +297,7 @@ public class DataHandler : MonoBehaviour
                     GameObject createdSource = Instantiate(storage, sp, Quaternion.Euler(0, -90, 0));
                     createdSource.GetComponent<Storage>().cur = rd.cur;
                     createdSource.GetComponent<Storage>().type = Storage.ResourceType.copper;
+                    createdSource.GetComponent<Storage>().max = 50 * sc.storageBoost + 100;
                     createdSource.transform.Find("Ore 1").GetComponent<MeshRenderer>().material = copper;
                     createdSource.transform.Find("Ore 2").GetComponent<MeshRenderer>().material = copper;
                     createdSource.transform.Find("Ore 3").GetComponent<MeshRenderer>().material = copper;
@@ -307,6 +315,7 @@ public class DataHandler : MonoBehaviour
                     GameObject createdSource = Instantiate(storage, sp, Quaternion.Euler(0, -90, 0));
                     createdSource.GetComponent<Storage>().cur = rd.cur;
                     createdSource.GetComponent<Storage>().type = Storage.ResourceType.gold;
+                    createdSource.GetComponent<Storage>().max = 50 * sc.storageBoost + 100;
                     createdSource.transform.Find("Ore 1").GetComponent<MeshRenderer>().material = gold;
                     createdSource.transform.Find("Ore 2").GetComponent<MeshRenderer>().material = gold;
                     createdSource.transform.Find("Ore 3").GetComponent<MeshRenderer>().material = gold;
@@ -323,6 +332,7 @@ public class DataHandler : MonoBehaviour
                 {
                     GameObject createdSource = Instantiate(logHolder, sp, Quaternion.Euler(0, -90, 0));
                     createdSource.GetComponent<Storage>().cur = rd.cur;
+                    createdSource.GetComponent<Storage>().max = 50 * sc.storageBoost + 100;
                     createdSource.GetComponent<Storage>().type = Storage.ResourceType.wood;
                     createdSource.transform.SetParent(GameObject.Find("Storages").transform);
                     createdSource.GetComponent<Storage>().isFree = true;
