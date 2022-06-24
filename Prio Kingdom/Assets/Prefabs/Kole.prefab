@@ -5229,11 +5229,14 @@ MonoBehaviour:
   curJob: 
   jobState: 
   near2target: 0
+  health: 100
+  power: 10
   targetObj: {fileID: 0}
   pickaxe: {fileID: 7711204632726537256}
   ore: {fileID: 7711204632265098509}
   axe: {fileID: 7476778095091938739}
   log: {fileID: 2374572080254456040}
+  wname: 
 --- !u!195 &7711204632247164612
 NavMeshAgent:
   m_ObjectHideFlags: 0

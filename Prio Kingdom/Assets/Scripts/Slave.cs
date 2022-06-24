@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class Slave : MonoBehaviour
 {
     ResourceHandler reshand;
+    RaidHandler raidhand;
     Animator animator;
     NavMeshAgent agent;
 
@@ -15,6 +16,11 @@ public class Slave : MonoBehaviour
     public string curJob;
     public string jobState;
     public bool near2target;
+
+    public int health;
+    public int power;
+    public string state; // for the raid
+    public Enemy targetEnemy;
 
     public GameObject targetObj;
 
@@ -29,6 +35,7 @@ public class Slave : MonoBehaviour
     {
         //ColorHandler();
         reshand = GameObject.Find("GameHandler").GetComponent<ResourceHandler>();
+        raidhand = GameObject.Find("GameHandler").GetComponent<RaidHandler>();
         reshand.slaves.Add(this);
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
@@ -38,74 +45,118 @@ public class Slave : MonoBehaviour
 
     private void Update()
     {
-        if (jobState == "movn2source" && !animator.GetBool("walkn"))
+        if (raidhand.isRaidTime)
         {
-            animator.SetBool("walkn", true);
-            animator.SetBool("minen", false);
-            animator.SetBool("caryn", false);
-            animator.SetBool("felln", false);
-            animator.SetBool("farmn", false);
-            ore.SetActive(false);
-            log.SetActive(false);
-            pickaxe.SetActive(false);
-            axe.SetActive(false);
-        }
-        else if (jobState == "caryn" && !animator.GetBool("caryn"))
-        {
-            animator.SetBool("walkn", false);
-            animator.SetBool("minen", false);
-            animator.SetBool("felln", false);
-            animator.SetBool("caryn", true);
-            if (curJob == "wood")
+            if (health < 1)
             {
-                log.SetActive(true);
+                if (jobState != "ded")
+                {
+                    jobState = "ded";
+                    agent.ResetPath();
+                    animator.SetTrigger("ded");
+                    raidhand.alives.Remove(this);
+                }
+            }
+            else
+            {
+                if (targetEnemy == null || targetEnemy.GetComponent<Enemy>().health <= 0)
+                {
+                    if (raidhand.enemies.Count != 0) // check if all workers dead
+                    {
+                        targetEnemy = raidhand.enemies[Random.Range(0, raidhand.enemies.Count)];
+                        agent.SetDestination(targetEnemy.transform.position);
+                        state = "moving2target";
+                    }
+                    animator.SetBool("walkn", true);
+                }
+                else
+                {
+                    if (Vector3.Distance(transform.position, targetEnemy.transform.position) < 4)
+                    {
+                        transform.LookAt(new Vector3(targetEnemy.transform.position.x, transform.position.y, targetEnemy.transform.position.z));
+                        if (state == "moving2target")
+                        {
+                            state = "beatBegin";
+                            animator.SetBool("walkn", false);
+                            agent.ResetPath();
+                            animator.SetTrigger("atk" + Random.Range(1, 5));
+                        }
+                    }
+                    else
+                    {
+                        if (state != "beatBegin")
+                        {
+                            agent.SetDestination(targetEnemy.transform.position);
+                            animator.SetBool("walkn", true);
+                            state = "moving2target";
+                        }
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (jobState == "movn2source" && !animator.GetBool("walkn"))
+            {
+                animator.SetBool("walkn", true);
+                animator.SetBool("minen", false);
+                animator.SetBool("caryn", false);
+                animator.SetBool("felln", false);
+                animator.SetBool("farmn", false);
+                ore.SetActive(false);
+                log.SetActive(false);
+                pickaxe.SetActive(false);
                 axe.SetActive(false);
             }
-            else
+            else if (jobState == "caryn" && !animator.GetBool("caryn"))
             {
-                ore.SetActive(true);
+                animator.SetBool("walkn", false);
+                animator.SetBool("minen", false);
+                animator.SetBool("felln", false);
+                animator.SetBool("caryn", true);
+                if (curJob == "wood")
+                {
+                    log.SetActive(true);
+                    axe.SetActive(false);
+                }
+                else
+                {
+                    ore.SetActive(true);
+                    pickaxe.SetActive(false);
+                }
+            }
+            else if (jobState == "workn" && !(animator.GetBool("minen") || animator.GetBool("felln") || animator.GetBool("farmn")))
+            {
+                animator.SetBool("walkn", false);
+                animator.SetBool("caryn", false);
+                if (curJob == "wood")
+                {
+                    animator.SetBool("felln", true);
+                    axe.SetActive(true);
+                }
+                else if (curJob == "food")
+                {
+                    animator.SetBool("farmn", true);
+                }
+                else
+                {
+                    animator.SetBool("minen", true);
+                    pickaxe.SetActive(true);
+                }
+            }
+            else if (jobState == "begin2job" || jobState == "idle")
+            {
+                animator.SetBool("walkn", false);
+                animator.SetBool("minen", false);
+                animator.SetBool("caryn", false);
+                animator.SetBool("felln", false);
+                animator.SetBool("farmn", false);
                 pickaxe.SetActive(false);
+                axe.SetActive(false);
+                ore.SetActive(false);
+                log.SetActive(false);
             }
         }
-        else if (jobState == "workn" && !(animator.GetBool("minen") || animator.GetBool("felln") || animator.GetBool("farmn")))
-        {
-            animator.SetBool("walkn", false);
-            animator.SetBool("caryn", false);
-            if (curJob == "wood")
-            {
-                animator.SetBool("felln", true);
-                axe.SetActive(true);
-            }
-            else if (curJob == "food")
-            {
-                animator.SetBool("farmn", true);
-            }
-            else
-            {
-                animator.SetBool("minen", true);
-                pickaxe.SetActive(true);
-            }
-        }
-        else if ((jobState == "begin2job" || jobState == "idle"))
-        {
-            animator.SetBool("walkn", false);
-            animator.SetBool("minen", false);
-            animator.SetBool("caryn", false);
-            animator.SetBool("felln", false);
-            animator.SetBool("farmn", false);
-            pickaxe.SetActive(false);
-            axe.SetActive(false);
-            ore.SetActive(false);
-            log.SetActive(false);
-        }
-    }
-
-    private void ColorHandler()
-    {
-        transform.GetChild(2).GetComponent<SkinnedMeshRenderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
-        transform.GetChild(3).GetComponent<SkinnedMeshRenderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
-        transform.GetChild(4).GetComponent<SkinnedMeshRenderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
-        transform.GetChild(5).GetComponent<SkinnedMeshRenderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
     }
 
     public void GetJob()
@@ -249,5 +300,18 @@ public class Slave : MonoBehaviour
     public void ResourceUp()
     {
         targetObj.GetComponent<Resource>().AddSource();
+    }
+
+    public void HitLanded()
+    {
+        if (targetEnemy != null)
+        {
+            targetEnemy.GetComponent<Enemy>().health -= power;
+        }
+    }
+
+    public void BeatEnd()
+    {
+        state = "moving2target";
     }
 }

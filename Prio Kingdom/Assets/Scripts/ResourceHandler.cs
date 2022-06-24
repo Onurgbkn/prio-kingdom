@@ -26,8 +26,8 @@ public class ResourceHandler : MonoBehaviour
         {
             if (GameObject.Find("Forest").transform.childCount < 20)
             {
-                int x = Random.Range(-90, 90);
-                int z = Random.Range(-90, 90);
+                int x = Random.Range(-400, 400);
+                int z = Random.Range(-400, 400);
                 Vector3 sp = new Vector3(x, 0, z);
                 var hitColliders = Physics.OverlapSphere(new Vector3(x, 5, z), 4);
                 if (hitColliders.Length > 0)
