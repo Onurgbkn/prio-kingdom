@@ -36,6 +36,7 @@ public class DataHandler : MonoBehaviour
 
     public void NewGame()
     {
+        sc.StartTuto();
     }
 
     public void SaveGame()

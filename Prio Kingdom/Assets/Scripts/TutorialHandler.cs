@@ -8,13 +8,10 @@ public class TutorialHandler : MonoBehaviour
     SourceCounter sc;
 
     public List<GameObject> tutoHints;
-    void Start()
-    {
-        sc = GetComponent<SourceCounter>();
-    }
 
     public void TutoStarts()
     {
+        sc = GetComponent<SourceCounter>();
         if (sc.tutoCount != 11)
         {
             tutoHints[sc.tutoCount].SetActive(true);
@@ -29,7 +26,7 @@ public class TutorialHandler : MonoBehaviour
     IEnumerator SwapTuto()
     {
         tutoHints[sc.tutoCount++].SetActive(false);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         if (sc.tutoCount != 11)
         {
             tutoHints[sc.tutoCount].SetActive(true);
