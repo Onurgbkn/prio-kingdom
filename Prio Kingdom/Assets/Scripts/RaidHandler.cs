@@ -29,11 +29,11 @@ public class RaidHandler : MonoBehaviour
         alives = new List<Slave>(rh.slaves);
         for (int i = 0; i < difficulty; i++)
         {
-            int locX = Random.Range(-250, 250);
-            int locY = Random.Range(350, 450);
-            GameObject enemy = Instantiate(enemyPrefab, new Vector3(locX, 0, locY), Quaternion.identity);
-            enemy.GetComponent<Enemy>().power = sc.raidCount * 2 + 20;
-            enemy.GetComponent<Enemy>().health = sc.raidCount * 5 + 100;
+            int locX = -250;
+            int locZ = Random.Range(-250, 250);
+            GameObject enemy = Instantiate(enemyPrefab, new Vector3(locX, 0, locZ), Quaternion.identity);
+            enemy.GetComponent<Enemy>().power = sc.raidCount * 3 + 20;
+            enemy.GetComponent<Enemy>().health = sc.raidCount * 7 + 100;
             enemies.Add(enemy.GetComponent<Enemy>());
         }
     }

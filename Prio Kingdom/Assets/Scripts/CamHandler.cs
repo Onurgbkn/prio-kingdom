@@ -48,14 +48,18 @@ public class CamHandler : MonoBehaviour
                 dragPos = new Vector3(Input.GetTouch(0).deltaPosition.x * camSpeed * (transform.position.y / 20), 0, Input.GetTouch(0).deltaPosition.y * camSpeed * (transform.position.y / 20));
                 dragPos = Quaternion.Euler(0, 45, 0) * dragPos * Time.deltaTime;
 
-                bool leftmost = dragPos.x > 0 && transform.position.x - dragPos.x < -500;
-                bool rightmost = dragPos.x < 0 && transform.position.x - dragPos.x > 500;
-                bool botmost = dragPos.z > 0 && transform.position.z - dragPos.z < -500;
-                bool topmost = dragPos.z < 0 && transform.position.z - dragPos.z > 500;
+                bool leftmost = dragPos.x > 0 && transform.position.x - dragPos.x < -250;
+                bool rightmost = dragPos.x < 0 && transform.position.x - dragPos.x > 200;
+                bool botmost = dragPos.z > 0 && transform.position.z - dragPos.z < -250;
+                bool topmost = dragPos.z < 0 && transform.position.z - dragPos.z > 200;
 
-                if (!(leftmost || rightmost || topmost || botmost))
+                if (!(leftmost || rightmost))
                 {
-                    transform.position = new Vector3(transform.position.x - dragPos.x, transform.position.y, transform.position.z - dragPos.z);
+                    transform.position = new Vector3(transform.position.x - dragPos.x, transform.position.y, transform.position.z);
+                }
+                if (!(topmost || botmost))
+                {
+                    transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - dragPos.z);
                 }
             }
         }

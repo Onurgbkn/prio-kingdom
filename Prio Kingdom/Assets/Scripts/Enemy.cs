@@ -57,7 +57,7 @@ public class Enemy : MonoBehaviour
                 {
                     if (raidHand.alives.Count == 0) // check if all workers dead
                     {
-                        agent.SetDestination(new Vector3(400, 0, 400));
+                        agent.SetDestination(new Vector3(250, 0, 250));
                         state = "back2home";
                     }
                     else
