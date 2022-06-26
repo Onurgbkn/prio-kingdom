@@ -21,12 +21,15 @@ public class SourceCounter : MonoBehaviour
     public int powerBoost;
     public int healthBoost;
     public int raidCount;
+    public int tutoCount;
 
     public TextMeshProUGUI foodElem;
     public TextMeshProUGUI woodElem;
     public TextMeshProUGUI ironElem;
     public TextMeshProUGUI copperElem;
     public TextMeshProUGUI goldElem;
+
+    public TutorialHandler th;
 
     public void AddFood(int count)
     {
@@ -95,5 +98,11 @@ public class SourceCounter : MonoBehaviour
         AddIron(0);
         AddCopper(0);
         AddGold(0);
+    }
+
+    public void StartTuto()
+    {
+        th = GetComponent<TutorialHandler>();
+        th.TutoStarts();
     }
 }

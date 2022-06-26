@@ -16,6 +16,13 @@ public class CamHandler : MonoBehaviour
     public GameObject selectedSlave;
     public GameObject jobsPanel;
 
+    SourceCounter sc;
+
+    private void Start()
+    {
+        sc = GetComponent<SourceCounter>();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -34,6 +41,10 @@ public class CamHandler : MonoBehaviour
                     if (hit.collider.GetComponent<BuildHandler>() == null && isDragable)
                     {
                         onDrag = true;
+                        if (sc.tutoCount == 0)
+                        {
+                            sc.th.TutoDone();
+                        }
                     }
                 }
             }
@@ -90,6 +101,10 @@ public class CamHandler : MonoBehaviour
             }
 
             transform.Translate(new Vector3(0, 0, difference) * Time.deltaTime, Space.Self);
+            if (sc.tutoCount == 1)
+            {
+                sc.th.TutoDone();
+            }
         }
 
         // Follow slave

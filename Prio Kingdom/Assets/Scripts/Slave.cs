@@ -32,6 +32,10 @@ public class Slave : MonoBehaviour
 
     public string wname;
 
+    public AudioSource audioSource;
+    public AudioClip tree;
+    public AudioClip mine;
+
     private void Start()
     {
         //ColorHandler();
@@ -40,6 +44,7 @@ public class Slave : MonoBehaviour
         reshand.slaves.Add(this);
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        audioSource = GetComponent<AudioSource>();
         GetJob();
         Time2Work(curJob);
     }
@@ -319,6 +324,14 @@ public class Slave : MonoBehaviour
     public void ResourceUp()
     {
         targetObj.GetComponent<Resource>().AddSource();
+        if (curJob == "wood")
+        {
+            audioSource.PlayOneShot(tree, 0.5f);
+        }
+        else if (curJob == "iron" || curJob == "copper" || curJob == "gold")
+        {
+            audioSource.PlayOneShot(mine, 0.5f);
+        }
     }
 
     public void HitLanded()

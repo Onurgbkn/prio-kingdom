@@ -42,6 +42,10 @@ public class UIHandler : MonoBehaviour
         Camera.main.GetComponent<CamHandler>().isDragable = false;
         slavePanel.SetActive(false);
         upgradePanel.SetActive(false);
+        if (sc.tutoCount == 2 || sc.tutoCount == 5)
+        {
+            sc.th.TutoDone();
+        }
     }
 
     public void HideShopPanel()
@@ -57,6 +61,10 @@ public class UIHandler : MonoBehaviour
         Camera.main.GetComponent<CamHandler>().isDragable = false;
         slavePanel.SetActive(false);
         shopanel.SetActive(false);
+        if (sc.tutoCount == 9)
+        {
+            sc.th.TutoDone();
+        }
     }
 
     public void HideUpgradePanel()
@@ -85,6 +93,10 @@ public class UIHandler : MonoBehaviour
         minePanel.SetActive(false);
         storagePanel.SetActive(false);
         addWorkerPanel.SetActive(true);
+        if (sc.tutoCount == 6)
+        {
+            sc.th.TutoDone();
+        }
     }
 
     public void SpawnIronMine()
@@ -139,6 +151,11 @@ public class UIHandler : MonoBehaviour
             Camera.main.GetComponent<CamHandler>().isDragable = true;
 
             createdFarm.transform.SetParent(GameObject.Find("Mines").transform);
+
+            if (sc.tutoCount == 3)
+            {
+                sc.th.TutoDone();
+            }
         }
     }
 
@@ -217,6 +234,11 @@ public class UIHandler : MonoBehaviour
         buttonRej.gameObject.SetActive(false);
 
         slavePanel.SetActive(true);
+
+        if (sc.tutoCount == 4)
+        {
+            sc.th.TutoDone();
+        }
     }
 
     public void BuildCanceled()
@@ -251,6 +273,10 @@ public class UIHandler : MonoBehaviour
 
     public void ToggleSlavePanel()
     {
+        if (sc.tutoCount == 10)
+        {
+            sc.th.TutoDone();
+        }
         if (slavePanel.activeSelf)
         {
             slavePanel.SetActive(false);
@@ -267,6 +293,10 @@ public class UIHandler : MonoBehaviour
         slavePanel.SetActive(false);
         shopanel.SetActive(false);
         upgradePanel.SetActive(false);
+        if (sc.tutoCount == 8)
+        {
+            sc.th.TutoDone();
+        }
     }
     public void HideAddJobPanel()
     {

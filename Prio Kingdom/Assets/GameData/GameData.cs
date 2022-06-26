@@ -21,4 +21,6 @@ public class GameData
     public int powerBoost;
     public int healthBoost;
     public int raidCount;
+
+    public int tutoCount;
 }

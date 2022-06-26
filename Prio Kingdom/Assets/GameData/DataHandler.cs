@@ -87,6 +87,7 @@ public class DataHandler : MonoBehaviour
         gameData.raidCount= sc.raidCount;
         gameData.powerBoost= sc.powerBoost;
         gameData.healthBoost= sc.healthBoost;
+        gameData.tutoCount= sc.tutoCount;
 
 
         string json = JsonUtility.ToJson(gameData, true);
@@ -115,8 +116,10 @@ public class DataHandler : MonoBehaviour
             sc.raidCount = data.raidCount;
             sc.powerBoost = data.powerBoost;
             sc.healthBoost = data.healthBoost;
+            sc.tutoCount = data.tutoCount;
 
             sc.UpdateUI();
+            sc.StartTuto();
             updateU.UpdateReqUI();
         }
         catch (System.Exception)

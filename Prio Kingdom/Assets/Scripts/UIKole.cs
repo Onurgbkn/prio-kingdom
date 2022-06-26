@@ -73,6 +73,11 @@ public class UIKole : MonoBehaviour
 
             uihand.SlaveSelected(createdSlave);
             shopPanel.SetActive(false);
+
+            if (sc.tutoCount == 7)
+            {
+                sc.th.TutoDone();
+            }
         }
     }
 }
