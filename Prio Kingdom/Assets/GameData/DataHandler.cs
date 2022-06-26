@@ -84,6 +84,11 @@ public class DataHandler : MonoBehaviour
         gameData.treeGrowrate = sc.treeGrowrate;
         gameData.foodGrowrate = sc.foodGrowrate;
 
+        gameData.raidCount= sc.raidCount;
+        gameData.powerBoost= sc.powerBoost;
+        gameData.healthBoost= sc.healthBoost;
+
+
         string json = JsonUtility.ToJson(gameData, true);
         File.WriteAllText(Application.persistentDataPath + "/save/gamedata.json", json);
     }
@@ -107,6 +112,10 @@ public class DataHandler : MonoBehaviour
             sc.treeGrowrate = data.treeGrowrate;
             sc.foodGrowrate = data.foodGrowrate;
 
+            sc.raidCount = data.raidCount;
+            sc.powerBoost = data.powerBoost;
+            sc.healthBoost = data.healthBoost;
+
             sc.UpdateUI();
             updateU.UpdateReqUI();
         }
@@ -125,7 +134,6 @@ public class DataHandler : MonoBehaviour
             workerData.wname = worker.wname;
             workerData.jobs = worker.jobs;
             workers.workers.Add(workerData);
-
         }
    
         string json = JsonUtility.ToJson(workers, true);
@@ -140,7 +148,7 @@ public class DataHandler : MonoBehaviour
             WorkersData workersData = JsonUtility.FromJson<WorkersData>(json);
             foreach (WorkerData workerData in workersData.workers)
             {
-                GameObject createdSlave = Instantiate(slave, new Vector3(100, 0, 100), Quaternion.identity);
+                GameObject createdSlave = Instantiate(slave, new Vector3(Random.Range(-50, 50), 0, Random.Range(-50, 50)), Quaternion.identity);
                 createdSlave.transform.parent = GameObject.Find("Slaves").transform;
 
                 createdSlave.transform.GetChild(2).GetComponent<SkinnedMeshRenderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
@@ -150,6 +158,9 @@ public class DataHandler : MonoBehaviour
                 
                 createdSlave.GetComponent<Slave>().wname = workerData.wname;
                 createdSlave.GetComponent<Slave>().jobs = workerData.jobs;
+                createdSlave.GetComponent<Slave>().maxHealth = sc.healthBoost * 10 + 100;
+                createdSlave.GetComponent<Slave>().health = sc.healthBoost * 10 + 100;
+                createdSlave.GetComponent<Slave>().power = sc.powerBoost * 5 + 10;
 
                 Button iconObj = Instantiate(workerIcon);
                 iconObj.GetComponentInChildren<TextMeshProUGUI>().text = workerData.wname;
@@ -231,7 +242,7 @@ public class DataHandler : MonoBehaviour
                     Destroy(buildObj.gameObject.GetComponent<MeshRenderer>());
                     Destroy(buildObj);
                 }
-                else if (rd.type.ToString() == "grow")
+                else if (rd.type.ToString() == "grow" || rd.type.ToString() == "food")
                 {
                     GameObject createdSource = Instantiate(farm, sp, Quaternion.Euler(0, -90, 0));
                     createdSource.GetComponent<Resource>().cur = rd.cur;

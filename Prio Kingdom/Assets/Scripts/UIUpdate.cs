@@ -14,6 +14,9 @@ public class UIUpdate : MonoBehaviour
     public TextMeshProUGUI cap4Storage;
     public TextMeshProUGUI foodGrowFaster;
     public TextMeshProUGUI treeGrowFaster;
+    public TextMeshProUGUI powerBoost;
+    public TextMeshProUGUI healthBoost;
+
 
     public void Worker4Mine()
     {
@@ -78,6 +81,33 @@ public class UIUpdate : MonoBehaviour
         }
     }
 
+    public void Power4Slaves()
+    {
+        int cost = 10 * (int)Math.Pow(2, sc.powerBoost);
+        if (sc.goldCount >= cost)
+        {
+            rh.GetSource("gold", cost);
+            sc.powerBoost += 1;
+            sc.GetGold(cost);
+            powerBoost.text = (10 * Math.Pow(2, sc.powerBoost)).ToString();
+            rh.Power4Slaves();
+        }
+    }
+
+    public void Health4Slaves()
+    {
+        int cost = 10 * (int)Math.Pow(2, sc.healthBoost);
+        if (sc.goldCount >= cost)
+        {
+            rh.GetSource("gold", cost);
+            sc.healthBoost += 1;
+            sc.GetGold(cost);
+            healthBoost.text = (10 * Math.Pow(2, sc.healthBoost)).ToString();
+            rh.Health4Slaves();
+        }
+    }
+
+
     public void UpdateReqUI()
     {
         worker4Mine.text = (10 * Math.Pow(2, sc.worker4Mine)).ToString();
@@ -85,5 +115,7 @@ public class UIUpdate : MonoBehaviour
         cap4Storage.text = (10 * Math.Pow(2, sc.storageBoost)).ToString();
         foodGrowFaster.text = (10 * Math.Pow(2, sc.foodGrowrate)).ToString();
         treeGrowFaster.text = (10 * Math.Pow(2, sc.treeGrowrate)).ToString();
+        powerBoost.text = (10 * Math.Pow(2, sc.powerBoost)).ToString();
+        healthBoost.text = (10 * Math.Pow(2, sc.healthBoost)).ToString();
     }
 }

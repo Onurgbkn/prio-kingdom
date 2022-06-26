@@ -128,7 +128,7 @@ public class UIHandler : MonoBehaviour
 
     public void SpawnFarm()
     {
-        if (sc.woodCount >= 50)
+        if (sc.woodCount >= 25)
         {
             float t = (Camera.main.transform.position.y - 1.55f) / 1.4f; // for the zoom
             Vector3 sp = new Vector3(Camera.main.transform.position.x + t, 0, Camera.main.transform.position.z + t);

@@ -17,4 +17,8 @@ public class GameData
     public int storageBoost;
     public int treeGrowrate;
     public int foodGrowrate;
+
+    public int powerBoost;
+    public int healthBoost;
+    public int raidCount;
 }

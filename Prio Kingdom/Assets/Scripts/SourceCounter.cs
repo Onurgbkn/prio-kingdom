@@ -18,6 +18,10 @@ public class SourceCounter : MonoBehaviour
     public int treeGrowrate;
     public int foodGrowrate;
 
+    public int powerBoost;
+    public int healthBoost;
+    public int raidCount;
+
     public TextMeshProUGUI foodElem;
     public TextMeshProUGUI woodElem;
     public TextMeshProUGUI ironElem;

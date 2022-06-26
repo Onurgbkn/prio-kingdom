@@ -5229,8 +5229,11 @@ MonoBehaviour:
   curJob: 
   jobState: 
   near2target: 0
+  maxHealth: 100
   health: 100
   power: 10
+  state: 
+  targetEnemy: {fileID: 0}
   targetObj: {fileID: 0}
   pickaxe: {fileID: 7711204632726537256}
   ore: {fileID: 7711204632265098509}

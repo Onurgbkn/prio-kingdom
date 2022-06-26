@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -38,23 +37,35 @@ public class Enemy : MonoBehaviour
                 agent.ResetPath();
                 animator.SetTrigger("ded");
                 raidHand.enemies.Remove(this);
-                DestroyBody();
+                if (raidHand.enemies.Count == 0)
+                {
+                    raidHand.isWin = true;
+                    raidHand.RaidEnded();
+                }
+                StartCoroutine(DestroyBody());
             }
         }
         else
         {
             if (state != "beatBegin" && (target == null || target.GetComponent<Slave>().health <= 0))
             {
-                if (raidHand.alives.Count == 0) // check if all workers dead
+                if (state == "back2home")
                 {
-                    agent.SetDestination(new Vector3(500, 0, 500));
-                    state = "back2home";
+                    StartCoroutine(Back2Home());
                 }
                 else
                 {
-                    target = raidHand.alives[Random.Range(0, raidHand.alives.Count)];
-                    agent.SetDestination(target.transform.position);
-                    state = "moving2target";
+                    if (raidHand.alives.Count == 0) // check if all workers dead
+                    {
+                        agent.SetDestination(new Vector3(400, 0, 400));
+                        state = "back2home";
+                    }
+                    else
+                    {
+                        target = raidHand.alives[Random.Range(0, raidHand.alives.Count)];
+                        agent.SetDestination(target.transform.position);
+                        state = "moving2target";
+                    }
                 }
                 animator.SetBool("walkn", true);
             }
@@ -65,7 +76,7 @@ public class Enemy : MonoBehaviour
                     transform.LookAt(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z));
                     if (state == "moving2target")
                     {
-                        target.targetEnemy = this;
+                        if (target.state == "moving2target") target.targetEnemy = this;
                         state = "beatBegin";
                         animator.SetBool("walkn", false);
                         agent.ResetPath();
@@ -100,7 +111,15 @@ public class Enemy : MonoBehaviour
 
     IEnumerator DestroyBody()
     {
+        yield return new WaitForSeconds(5f);// Wait a bit
+        Destroy(this.gameObject);
+    }
+
+    IEnumerator Back2Home()
+    {
         yield return new WaitForSeconds(10f);// Wait a bit
+        raidHand.enemies.Remove(this);
+        if (raidHand.enemies.Count == 0) raidHand.RaidEnded();
         Destroy(this.gameObject);
     }
 }

@@ -10,31 +10,62 @@ public class RaidHandler : MonoBehaviour
     public List<Enemy> enemies;
 
     ResourceHandler rh;
+    SourceCounter sc;
 
     public bool isRaidTime;
+    public bool isWin;
+    int enemyCount;
 
     void Start()
     {
         rh = GetComponent<ResourceHandler>();
+        sc = Camera.main.GetComponent<SourceCounter>();
+        StartCoroutine(RaidStarter());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown("space"))
-        {
-            RaidStarted();
-        }
-    }
-
-    private void RaidStarted()
+    private void RaidStarted(int difficulty)
     {
         isRaidTime = true;
         alives = new List<Slave>(rh.slaves);
-        for (int i = 0; i < 1; i++)
+        for (int i = 0; i < difficulty; i++)
         {
-            GameObject enemy = Instantiate(enemyPrefab, new Vector3(i*-10+200, 0, i*-10+200), Quaternion.identity);
+            int locX = Random.Range(-250, 250);
+            int locY = Random.Range(350, 450);
+            GameObject enemy = Instantiate(enemyPrefab, new Vector3(locX, 0, locY), Quaternion.identity);
+            enemy.GetComponent<Enemy>().power = sc.raidCount * 2 + 20;
+            enemy.GetComponent<Enemy>().health = sc.raidCount * 5 + 100;
             enemies.Add(enemy.GetComponent<Enemy>());
+        }
+    }
+
+    public void RaidEnded()
+    {
+        if (enemies.Count == 0 && isRaidTime)
+        {
+            isRaidTime = false;
+            if (isWin)
+            {
+                sc.raidCount += 1;
+                isWin = false;
+            }
+            foreach (Slave slave in rh.slaves)
+            {
+                slave.Revive();
+            }
+            rh.GetJob4Slave();
+        }
+    }
+
+    IEnumerator RaidStarter()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(300);// Wait a bit
+            if (!isRaidTime)
+            {
+                enemyCount = sc.raidCount*2 + 1;
+                RaidStarted(enemyCount);
+            }
         }
     }
 }

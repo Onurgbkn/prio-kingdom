@@ -167,4 +167,21 @@ public class ResourceHandler : MonoBehaviour
         UpdateJobs();
         GetJob4Slave();
     }
+
+    public void Power4Slaves()
+    {
+        foreach (Slave s in slaves)
+        {
+            s.power += 5;
+        }
+    }
+
+    public void Health4Slaves()
+    {
+        foreach (Slave s in slaves)
+        {
+            s.health += 10;
+            s.maxHealth += 10;
+        }
+    }
 }

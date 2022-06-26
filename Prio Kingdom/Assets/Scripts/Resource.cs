@@ -64,8 +64,8 @@ public class Resource : MonoBehaviour
             }
             else if (type.ToString() == "grow")
             {
-                reshand.GetSource("wood", 50);
-                sc.GetWood(50);
+                reshand.GetSource("wood", 25);
+                sc.GetWood(25);
             }
 
         }

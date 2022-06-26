@@ -36,9 +36,9 @@ public class UIKole : MonoBehaviour
 
     public void CreateSlave()
     {
-        if (sc.foodCount >= 10)
+        if (sc.foodCount >= 25)
         {
-            sc.GetFood(10);
+            sc.GetFood(25);
 
             GameObject createdSlave = Instantiate(worker, new Vector3(100, 0, 100), Quaternion.identity);
             createdSlave.transform.parent = GameObject.Find("Slaves").transform;
@@ -60,6 +60,9 @@ public class UIKole : MonoBehaviour
                 tempName = tempName.Substring(0, 10);
             }
             createdSlave.GetComponent<Slave>().wname = tempName;
+            createdSlave.GetComponent<Slave>().maxHealth = sc.healthBoost * 10 + 100;
+            createdSlave.GetComponent<Slave>().health = sc.healthBoost * 10 + 100;
+            createdSlave.GetComponent<Slave>().power = sc.powerBoost * 5 + 10;
             wname.text = "";
 
             Button iconObj = Instantiate(workerIcon);

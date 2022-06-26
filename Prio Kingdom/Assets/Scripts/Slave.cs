@@ -17,6 +17,7 @@ public class Slave : MonoBehaviour
     public string jobState;
     public bool near2target;
 
+    public int maxHealth;
     public int health;
     public int power;
     public string state; // for the raid
@@ -47,13 +48,30 @@ public class Slave : MonoBehaviour
     {
         if (raidhand.isRaidTime)
         {
+            if (jobState != "defending" && jobState != "ded")
+            {
+                if (jobState == "workn" && targetObj != null)
+                {
+                    targetObj.GetComponent<Resource>().workerCount -= 1;
+                }
+                animator.SetBool("walkn", true);
+                animator.SetBool("minen", false);
+                animator.SetBool("caryn", false);
+                animator.SetBool("felln", false);
+                animator.SetBool("farmn", false);
+                ore.SetActive(false);
+                log.SetActive(false);
+                pickaxe.SetActive(false);
+                axe.SetActive(false);
+                jobState = "defending";
+            }
             if (health < 1)
             {
                 if (jobState != "ded")
                 {
                     jobState = "ded";
                     agent.ResetPath();
-                    animator.SetTrigger("ded");
+                    animator.SetBool("dead", true);
                     raidhand.alives.Remove(this);
                 }
             }
@@ -71,11 +89,12 @@ public class Slave : MonoBehaviour
                 }
                 else
                 {
-                    if (Vector3.Distance(transform.position, targetEnemy.transform.position) < 4)
+                    if (Vector3.Distance(transform.position, targetEnemy.transform.position) < 6)
                     {
                         transform.LookAt(new Vector3(targetEnemy.transform.position.x, transform.position.y, targetEnemy.transform.position.z));
                         if (state == "moving2target")
                         {
+                            if (targetEnemy.state == "moving2target") targetEnemy.target = this;
                             state = "beatBegin";
                             animator.SetBool("walkn", false);
                             agent.ResetPath();
@@ -265,7 +284,7 @@ public class Slave : MonoBehaviour
                 {
                     near2target = false;
                     agent.ResetPath();
-                    targetObj.GetComponent<Storage>().AddResource(5);
+                    targetObj.GetComponent<Storage>().AddResource(10);
                     jobState = "begin2job";
                     GetJob();
                 }
@@ -313,5 +332,12 @@ public class Slave : MonoBehaviour
     public void BeatEnd()
     {
         state = "moving2target";
+    }
+
+    public void Revive()
+    {
+        health = maxHealth;
+        jobState = "movn2source";
+        animator.SetBool("dead", false);
     }
 }
