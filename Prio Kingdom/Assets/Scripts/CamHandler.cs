@@ -95,7 +95,7 @@ public class CamHandler : MonoBehaviour
 
             float difference = (currentMagnitude - prevMagnitude) * 4;
 
-            if ((transform.position.y >80 && difference < 0) || (transform.position.y < 15 && difference > 0))
+            if ((transform.position.y >80 && difference < 0) || (transform.position.y < 20 && difference > 0))
             {
                 difference = 0;
             }

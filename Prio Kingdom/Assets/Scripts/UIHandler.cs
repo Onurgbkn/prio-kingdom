@@ -233,6 +233,7 @@ public class UIHandler : MonoBehaviour
 
     public void BuildApproved()
     {
+        if (sc.tutoCount == 4) return;
         string sourceType = buildObj.GetComponent<BuildHandler>().type.Split(' ')[0];
         string workType = buildObj.GetComponent<BuildHandler>().type.Split(' ')[1];
         
