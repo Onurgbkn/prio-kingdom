@@ -79,6 +79,10 @@ public class BuildHandler : MonoBehaviour
             if (plane.Raycast(ray, out distance))
             {
                 transform.parent.position = ray.GetPoint(distance);
+                if (uihandler.sc.tutoCount == 4)
+                {
+                    uihandler.sc.th.TutoDone();
+                }
             }
         }
 

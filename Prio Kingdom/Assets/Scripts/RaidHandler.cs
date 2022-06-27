@@ -30,9 +30,9 @@ public class RaidHandler : MonoBehaviour
         StartCoroutine(AlertCorotineStarter());
     }
 
-    private void RaidStarted(int difficulty)
+    public void RaidStarted(int difficulty)
     {
-        audioSource.PlayOneShot(yell, 0.5f);
+        audioSource.PlayOneShot(yell, 0.4f);
         isRaidTime = true;
         alives = new List<Slave>(rh.slaves);
         for (int i = 0; i < difficulty; i++)
@@ -61,6 +61,10 @@ public class RaidHandler : MonoBehaviour
                 slave.Revive();
             }
             rh.GetJob4Slave();
+            if (sc.tutoCount == 18)
+            {
+                sc.th.TutoDone();
+            }
         }
     }
 

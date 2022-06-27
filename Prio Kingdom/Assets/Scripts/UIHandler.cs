@@ -42,7 +42,7 @@ public class UIHandler : MonoBehaviour
         Camera.main.GetComponent<CamHandler>().isDragable = false;
         slavePanel.SetActive(false);
         upgradePanel.SetActive(false);
-        if (sc.tutoCount == 2 || sc.tutoCount == 5)
+        if (sc.tutoCount == 2 || sc.tutoCount == 6 || sc.tutoCount == 10)
         {
             sc.th.TutoDone();
         }
@@ -61,7 +61,7 @@ public class UIHandler : MonoBehaviour
         Camera.main.GetComponent<CamHandler>().isDragable = false;
         slavePanel.SetActive(false);
         shopanel.SetActive(false);
-        if (sc.tutoCount == 9)
+        if (sc.tutoCount == 19)
         {
             sc.th.TutoDone();
         }
@@ -86,6 +86,10 @@ public class UIHandler : MonoBehaviour
         minePanel.SetActive(false);
         storagePanel.SetActive(true);
         addWorkerPanel.SetActive(false);
+        if (sc.tutoCount == 7)
+        {
+            sc.th.TutoDone();
+        }
     }
 
     public void ShowWorker()
@@ -93,7 +97,7 @@ public class UIHandler : MonoBehaviour
         minePanel.SetActive(false);
         storagePanel.SetActive(false);
         addWorkerPanel.SetActive(true);
-        if (sc.tutoCount == 6)
+        if (sc.tutoCount == 11)
         {
             sc.th.TutoDone();
         }
@@ -104,6 +108,10 @@ public class UIHandler : MonoBehaviour
         if (sc.woodCount >= 10)
         {
             SpawnMine(Resource.ResourceType.iron, iron);
+            if (sc.tutoCount == 3)
+            {
+                sc.th.TutoDone();
+            }
         }
     }
 
@@ -181,6 +189,10 @@ public class UIHandler : MonoBehaviour
         if (sc.woodCount >= 10)
         {
             SpawnStorage(Storage.ResourceType.iron, iron);
+            if (sc.tutoCount == 8)
+            {
+                sc.th.TutoDone();
+            }
         }
     }
 
@@ -235,7 +247,7 @@ public class UIHandler : MonoBehaviour
 
         slavePanel.SetActive(true);
 
-        if (sc.tutoCount == 4)
+        if (sc.tutoCount == 5 || sc.tutoCount == 9)
         {
             sc.th.TutoDone();
         }
@@ -251,6 +263,10 @@ public class UIHandler : MonoBehaviour
     }
 
     public void SlaveSelected(GameObject slave) {
+        if (sc.tutoCount == 17)
+        {
+            sc.th.TutoDone();
+        }
         jobsPanel.SetActive(true);
         Camera.main.GetComponent<CamHandler>().selectedSlave = slave;
         Camera.main.GetComponent<CamHandler>().isDragable = true;
@@ -273,10 +289,6 @@ public class UIHandler : MonoBehaviour
 
     public void ToggleSlavePanel()
     {
-        if (sc.tutoCount == 10)
-        {
-            sc.th.TutoDone();
-        }
         if (slavePanel.activeSelf)
         {
             slavePanel.SetActive(false);
@@ -284,6 +296,10 @@ public class UIHandler : MonoBehaviour
         else
         {
             slavePanel.SetActive(true);
+            if (sc.tutoCount == 16)
+            {
+                sc.th.TutoDone();
+            }
         }
     }
 
@@ -293,7 +309,7 @@ public class UIHandler : MonoBehaviour
         slavePanel.SetActive(false);
         shopanel.SetActive(false);
         upgradePanel.SetActive(false);
-        if (sc.tutoCount == 8)
+        if (sc.tutoCount == 13)
         {
             sc.th.TutoDone();
         }
@@ -301,11 +317,19 @@ public class UIHandler : MonoBehaviour
     public void HideAddJobPanel()
     {
         addJobPanel.SetActive(false);
+        if (sc.tutoCount == 15)
+        {
+            sc.th.TutoDone();
+        }
     }
 
     public void JobIronMine()
     {
         AddJob("iron");
+        if (sc.tutoCount == 14)
+        {
+            sc.th.TutoDone();
+        }
     }
 
     public void JobCopperMine()

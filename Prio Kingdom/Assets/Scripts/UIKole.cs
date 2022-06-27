@@ -74,7 +74,7 @@ public class UIKole : MonoBehaviour
             uihand.SlaveSelected(createdSlave);
             shopPanel.SetActive(false);
 
-            if (sc.tutoCount == 7)
+            if (sc.tutoCount == 12)
             {
                 sc.th.TutoDone();
             }
