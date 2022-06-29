@@ -50,9 +50,12 @@ public class UIHandler : MonoBehaviour
 
     public void HideShopPanel()
     {
-        shopanel.SetActive(false);
-        Camera.main.GetComponent<CamHandler>().isDragable = true;
-        slavePanel.SetActive(true);
+        if (!(sc.tutoCount == 3 || sc.tutoCount == 7 || sc.tutoCount == 8 || sc.tutoCount == 11 || sc.tutoCount == 12))
+        {
+            shopanel.SetActive(false);
+            Camera.main.GetComponent<CamHandler>().isDragable = true;
+            slavePanel.SetActive(true);
+        }
     }
 
     public void ShowUpgradePanel()
@@ -256,6 +259,7 @@ public class UIHandler : MonoBehaviour
 
     public void BuildCanceled()
     {
+        if (sc.tutoCount == 4) return;
         Destroy(buildObj.transform.parent.gameObject);
         buttonApr.gameObject.SetActive(false);
         buttonRej.gameObject.SetActive(false);
@@ -317,10 +321,13 @@ public class UIHandler : MonoBehaviour
     }
     public void HideAddJobPanel()
     {
-        addJobPanel.SetActive(false);
-        if (sc.tutoCount == 15)
+        if (sc.tutoCount != 14)
         {
-            sc.th.TutoDone();
+            addJobPanel.SetActive(false);
+            if (sc.tutoCount == 15)
+            {
+                sc.th.TutoDone();
+            }
         }
     }
 
